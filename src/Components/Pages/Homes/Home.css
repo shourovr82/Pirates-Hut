@@ -1,0 +1,47 @@
+.primary-bg {
+  background-image: linear-gradient(to right bottom, #0e643c, #0e643c, #00574b, #004852, #00394e, #002941, #032540, #08213f, #0f1d3d, #0f224d, #10265d, #142a6d, #1b2e7d);
+}
+
+.button-color:hover {
+  box-shadow: 0px 0px 10px 0px #15f81e4a;
+  ;
+}
+
+.button-shadow {
+  box-shadow: 5px 2px 10px -3px #15f81e4a;
+  ;
+}
+
+
+.home-card {
+  background: linear-gradient(158deg, rgba(70, 48, 171, 1) 12%, rgba(5, 0, 11, .8) 90%);
+
+}
+
+.home-card-1 {
+  /* background-color: red; */
+  padding: 2rem;
+  background: linear-gradient(158deg, rgb(13, 117, 166) 12%, rgba(5, 0, 11, .8) 90%);
+  /* transition: background-color 1s ; */
+  transition: all 0.5s ease-in-out;
+}
+
+.home-card-1:hover {
+  cursor: pointer;
+  background: linear-gradient(158deg, rgb(16, 125, 175) 12%, rgba(1, 33, 48, 0.8) 90%);
+}
+
+.home-card-2 {
+  background: linear-gradient(158deg, rgb(48, 64, 198), rgba(5, 0, 11, .8) 90%);
+}
+
+.home-card-2:hover {
+  cursor: pointer;
+  background: linear-gradient(158deg, #3546df, #030841 90%);
+}
+
+.home-card:hover {
+  cursor: pointer;
+  transition: 5s all;
+  background: linear-gradient(158deg, rgb(77, 50, 201) 12%, rgb(15, 8, 48) 90%);
+}

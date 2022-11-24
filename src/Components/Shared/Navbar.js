@@ -32,7 +32,7 @@ const Navbar = () => {
   const navMenu = [
     { id: 'home', title: 'Home', path: '/' },
     { id: 'features', title: 'Features', path: '/features' },
-    { id: 'product', title: 'Product', path: '/product' },
+    { id: 'dashboard', title: 'Dashboard', path: '/dashboard' },
     { id: 'clients', title: 'Clients', path: '/clients' },
   ]
 
@@ -47,8 +47,8 @@ const Navbar = () => {
   window.addEventListener('scroll', changeBackground);
 
   return (
-    <div className={`w-full flex transparent  ${backgroundnav ? 'newnavbar ' : 'bg-[#015469]'} py-6 justify-between items-center navbar`}>
-      <img src={navlogo} alt="rexrox" className='w-[125px] h-[32px]' />
+    <div className={`w-full flex transparent  ${backgroundnav ? 'newnavbar ' : 'bg-[#015469]'} py-2 justify-between items-center navbar`}>
+      <img src={navlogo} alt="rexrox" className='w-[100px] h-[20px]' />
 
       <ul className='list-none sm:flex hidden justify-center items-center flex-1 gap-10  '>
         {navMenu.map((nav, index) => (

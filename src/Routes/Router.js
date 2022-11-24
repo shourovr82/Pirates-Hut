@@ -1,8 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import Products from "../Components/Pages/Category/Products/Products";
+import AddProduct from "../Components/Pages/Dashboard/AddProduct/AddProduct";
+import AllBuyers from "../Components/Pages/Dashboard/AllBuyers/AllBuyers";
+import AllSellers from "../Components/Pages/Dashboard/AllSellers/AllSellers";
+import Dashboard from "../Components/Pages/Dashboard/Dashboard";
+import MyOrders from "../Components/Pages/Dashboard/MyOrders/MyOrders";
+import MyProducts from "../Components/Pages/Dashboard/MyProducts/MyProducts";
 import Home from "../Components/Pages/Homes/Home";
 import Login from "../Components/Pages/Login/Login";
 import SignUp from "../Components/Pages/Login/SignUp";
+import DashboardLayout from "../Layouts/DashboardLayout";
 import Main from "../Layouts/Main";
 
 const router = createBrowserRouter([
@@ -27,6 +34,33 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
         element: <Products></Products>
       }
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: '/dashboard/myorders',
+        element: <MyOrders></MyOrders>
+      },
+      {
+        path: '/dashboard/myproducts',
+        element: <MyProducts></MyProducts>
+      },
+
+      {
+        path: '/dashboard/addProduct',
+        element: <AddProduct></AddProduct>
+      },
+      {
+        path: '/dashboard/allsellers',
+        element: <AllSellers></AllSellers>
+      },
+      {
+        path: '/dashboard/allbuyers',
+        element: <AllBuyers></AllBuyers>
+      },
     ]
   }
 ])

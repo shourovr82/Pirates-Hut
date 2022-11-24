@@ -14,9 +14,9 @@ const Home = () => {
   return (
     <div className=' primary-bg' >
 
-      <Banner></Banner>
+      {/* <Banner></Banner> */}
       <Category></Category>
-      <HomeCard></HomeCard>
+      {/* <HomeCard></HomeCard> */}
 
     </div>
   );

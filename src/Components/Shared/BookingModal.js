@@ -25,7 +25,8 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
       email: user?.email,
       buyerName: user?.displayName,
       phone: phone,
-      buyerLocation: location
+      buyerLocation: location,
+      availability: 'booked'
     }
 
 

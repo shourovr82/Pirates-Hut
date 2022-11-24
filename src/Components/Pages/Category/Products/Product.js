@@ -14,9 +14,6 @@ const Product = ({ product }) => {
   const handleBookItem = (data) => {
     const phone = data.phone;
     const location = data.location;
-    console.log(phone, location);
-
-
 
     // setModalitems(null)
   }

@@ -49,17 +49,17 @@ const AddProduct = () => {
 
 
   return (
-    <section class="bg-gray-100">
+    <section className="bg-gray-100">
 
-      <div class="rounded-lg p-10 bg-white  shadow-lg">
+      <div className="rounded-lg p-10 bg-white  shadow-lg">
 
 
         <form
           onSubmit={handleSubmit(hanleAddProduct)}
-          class="space-y-4">
+          className="space-y-4">
 
           {/*  name */}
-          <div class="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-4">
 
             <div>
               <label className="mb-1 block text-sm text-gray-600" htmlFor="name">
@@ -67,7 +67,7 @@ const AddProduct = () => {
               </label>
               <input
                 {...register("title")}
-                class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 placeholder="Product Name"
                 type="text"
                 id="name"
@@ -77,14 +77,14 @@ const AddProduct = () => {
           </div>
 
           {/*  price */}
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-sm text-gray-600" htmlFor="price">
                 Re Sale Price
               </label>
               <input
                 {...register("price")}
-                class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="number"
                 id="price"
                 placeholder='Item Name'
@@ -97,7 +97,7 @@ const AddProduct = () => {
               </label>
               <input
                 {...register("phone")}
-                class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="number"
                 id="phone"
                 placeholder='Item Name'
@@ -106,14 +106,14 @@ const AddProduct = () => {
           </div>
 
           {/*  year of purchase */}
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-sm text-gray-600" htmlFor="purchase">
                 Year of Purchase
               </label>
               <input
                 {...register("purchaseyear")}
-                class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="text"
                 id="purchase"
                 placeholder='Year of Purchase'
@@ -127,7 +127,7 @@ const AddProduct = () => {
               </label>
               <input
                 {...register("originalprice")}
-                class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="number"
                 id="originalprice"
                 placeholder='Original Price'
@@ -138,7 +138,7 @@ const AddProduct = () => {
 
           {/* conditions============================ */}
 
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
             <div>
               <label className="mb-1 block text-sm text-gray-600" htmlFor="condition">
@@ -175,7 +175,7 @@ const AddProduct = () => {
               </label>
               <input
                 {...register("location")}
-                class="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="text"
                 id="location"
                 placeholder='Your Location'
@@ -189,23 +189,23 @@ const AddProduct = () => {
             </label>
             <textarea
               {...register("description")}
-              class="w-full rounded-lg border border-gray-300 p-3 text-sm"
+              className="w-full rounded-lg border border-gray-300 p-3 text-sm"
               placeholder="description"
               rows="8"
               id="description"
             ></textarea>
           </div>
 
-          <div class="mt-4">
+          <div className="mt-4">
             <button
               type="submit"
-              class="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
             >
-              <span class="font-medium">Send Enquiry </span>
+              <span className="font-medium">Send Enquiry </span>
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="ml-3 h-5 w-5"
+                className="ml-3 h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

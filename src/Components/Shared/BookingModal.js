@@ -3,6 +3,8 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../AuthContexts/Contexts/AuthProvider';
+import { MdOutlineClose } from 'react-icons/md';
+
 
 const BookingModal = ({ product, setModalitems, handleBookItem }) => {
   const { user } = useContext(AuthContext)
@@ -47,10 +49,10 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
     <div>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box w-11/12 max-w-2xl">
 
+        <div className="modal-box w-11/12 max-w-2xl relative">
+          <label htmlFor="booking-modal" className="absolute z-10 text-center right-4 top-4 rounded-full bg-black p-2.5  cursor-pointer text-sm text-white"><MdOutlineClose className='text-lg' /></label>
 
-          {/* <h3 className="font-bold text-lg">Congratulations random Internet user!</h3> */}
           <div>
 
 
@@ -59,7 +61,7 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
               <h1 className="sr-only">Checkout</h1>
 
               <div className="relative mx-auto max-w-screen-2xl">
-                <div className="bg-white py-6">
+                <div className="py-0">
                   <div className="mx-auto max-w-lg px-4 lg:px-8">
 
                     <form
@@ -157,9 +159,7 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
 
                       <div className="col-span-6">
                         <div className="modal-action ">
-                          {/* <label
 
-                            htmlFor="booking-modal" className="block text-center w-full rounded-lg bg-black p-2.5 text-sm text-white">Pay Now</label> */}
 
                           <button
                             type='submit'

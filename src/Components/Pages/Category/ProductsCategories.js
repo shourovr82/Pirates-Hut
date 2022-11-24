@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductsCategories = ({ category }) => {
-  console.log(category);
   const { brand, _id, category: categoryName, title } = category;
   return (
     <div className="p-4 lg:w-1/3">

@@ -12,7 +12,8 @@ import { useForm } from 'react-hook-form';
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [photolink, setPhotoLink] = useState('');
-  const { googleLogin, registerNewAccount, updateUserProfile } = useContext(AuthContext);
+  const [accountType, setAccountType] = useState('User')
+  const { googleLogin, registerNewAccount, updateUserProfile, user } = useContext(AuthContext);
   const imgbbHostKey = process.env.REACT_APP_imgbb_key;
   const navigate = useNavigate();
 
@@ -47,7 +48,6 @@ const SignUp = () => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
-    console.log(name);
     const userDetails = {
       displayName: name,
       photoURL: photolink
@@ -56,15 +56,34 @@ const SignUp = () => {
     // register
     registerNewAccount(email, password)
       .then(result => {
-        const user = result.user;
         // update user
         updateUserProfile(userDetails)
           .then(result => {
-            toast.success('Registration Successfully')
-            navigate('/')
+            const newUser = {
+              name: name,
+              email: email,
+              password: password,
+              photoURL: photolink,
+              accountType,
+            }
+            fetch('http://localhost:5000/createuser', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify(newUser)
+            })
+              .then(res => res.json())
+              .then(result => {
+                toast.success('Registration Successfully')
+                console.log(user?.email);
+                navigate('/')
+              })
           })
           .catch(e => console.log(e))
-        console.log(user);
+
+
+
       })
       .catch(e => console.log(e))
   }
@@ -75,9 +94,25 @@ const SignUp = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then(result => {
-        const user = result.user;
-        toast.success(`Hey ${user.displayName} Welcome to the Website !  `)
-        navigate('/')
+        const googleUser = result.user;
+        const newUser = {
+          name: googleUser?.displayName,
+          email: googleUser?.email,
+          photoURL: googleUser?.photoURL,
+          accountType: 'Buyer',
+        }
+        fetch('http://localhost:5000/createuser', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newUser)
+        })
+          .then(res => res.json())
+          .then(result => {
+            navigate('/')
+            toast.success(`Hey ${googleUser?.displayName} Welcome to the Website !  `)
+          })
       })
       .catch(e => console.log(e))
   }
@@ -135,6 +170,34 @@ const SignUp = () => {
                   type="password" placeholder='Type Your Password' className='py-2 px-4 rounded-md bg-[#103f6b25]   border-spacing-3 border-b   input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' />
 
                 <div >
+
+                  {/* buyer or seller */}
+
+                  <div className='flex justify-end gap-3'>
+
+                    <div className="form-control border px-2 pl-5 border-[#35c0405b] rounded">
+                      <label className="label cursor-pointer">
+                        <span className="label-text text-white">User</span>
+                        <input
+                          onClick={() => setAccountType('User')}
+                          type="radio" name="radio-10" className="radio ml-2 bg-white checked:bg-green-700" defaultChecked={accountType === 'User'} />
+                      </label>
+                    </div>
+
+                    <div className="form-control px-2 pl-5 border rounded border-[#35c0405b] ">
+                      <label className="label cursor-pointer">
+                        <span className="label-text text-white">Seller</span>
+                        <input
+                          onClick={() => setAccountType('Seller')}
+                          type="radio" name="radio-10" className="radio ml-2 bg-white checked:bg-green-700" defaultChecked={accountType === 'Seller'} />
+                      </label>
+                    </div>
+                  </div>
+
+
+
+
+
                   <div className='md:flex items-center justify-between gap-3'>
                     <button type="submit" className="  py-2 rounded-full text-white text-lg  bg-gradient-to-r from-green-500 to-[#14147c2a] border-0 px-6 hover:from-green-500 button-shadow button-color hover:to-[#2d419c60]">
                       Sign Up

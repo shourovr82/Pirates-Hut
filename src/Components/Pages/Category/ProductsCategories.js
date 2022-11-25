@@ -1,20 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+
 
 const ProductsCategories = ({ category }) => {
-  const { brand, _id, category: categoryName, title } = category;
+  const { image, _id, category: categoryName, description } = category;
   return (
     <div className="p-4 lg:w-1/3">
-      <div className="h-full bg-white  px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-        <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{categoryName}</h2>
-        <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{title}</h1>
-        <p className="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-        <Link to={`/category/${_id}`} className="text-indigo-500 inline-flex items-center">Learn More
-          <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14"></path>
-            <path d="M12 5l7 7-7 7"></path>
-          </svg>
+      <div className="h-full bg-white  px-5  pt-5 pb-24 rounded-lg overflow-hidden text-center relative">
+        <img className='w-full h-[250px] shadow-xl rounded-lg mb-4' src={image} alt="" />
+
+
+
+        <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{categoryName}</h1>
+        <p className="leading-relaxed mb-3">{description?.slice(0, 120)}</p>
+
+
+
+        <Link to={`/category/${_id}`} className="flex justify-center">
+          <button type="submit" className=" flex items-center gap-2 mt-2 py-2 rounded-full text-white text-lg  bg-gradient-to-r from-green-700 to-[#030850] border-0 px-10 hover:from-green-800 button-shadow button-color hover:to-[#050614fb]">
+            <span>See Items</span> <FaArrowRight />
+          </button>
         </Link>
+
+
+
+
+
+
+
+
+
         <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
           <span className="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
             <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">

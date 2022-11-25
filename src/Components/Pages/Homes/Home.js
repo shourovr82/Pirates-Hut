@@ -9,9 +9,9 @@ const Home = () => {
 
 
   return (
-    <div className=' primary-bg' >
+    <div className='primary-bg  mt-[-100px] ' >
 
-      {/* <Banner></Banner> */}
+      <Banner></Banner>
       <Category></Category>
       {/* <HomeCard></HomeCard> */}
 

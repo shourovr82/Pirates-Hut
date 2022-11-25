@@ -2,7 +2,7 @@ import React from 'react';
 
 const Banner = () => {
   return (
-    <div className='  primary-bg mt-[-100px] h-[106vh]'>
+    <div className='  h-[105vh]'>
       <br />
       <br />
       <br />

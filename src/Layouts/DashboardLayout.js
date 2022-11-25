@@ -28,10 +28,9 @@ const DashboardLayout = () => {
 
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content  flex flex-col  gap-10 px-10 justify-center">
+        <div className="drawer-content  flex flex-col  gap-10 px-10 mt-10">
 
           <Outlet></Outlet>
-
 
           <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
         </div>
@@ -40,7 +39,7 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu  w-80 text-base-content bg-red-400">
-            <ul className="menu p-4 w-80 text-base-content">
+            <ul className="menu flex flex-col items-center   p-4 w-80 text-base-content">
               {
                 currentUser[0]?.accountType === 'Buyer' && <>
                   <li><Link to="/dashboard/myorders">My Orders</Link></li>

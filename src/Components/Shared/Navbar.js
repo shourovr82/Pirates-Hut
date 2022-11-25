@@ -48,7 +48,7 @@ const Navbar = () => {
   window.addEventListener('scroll', changeBackground);
 
   return (
-    <div className={`w-full flex transparent  ${backgroundnav ? 'newnavbar ' : 'bg-[#015469]'} py-2 justify-between items-center navbar`}>
+    <div className={`w-full flex transparent  ${backgroundnav ? 'newnavbar ' : 'bg-gradient-to-r from-green-700 to-[#030850]'} py-2 justify-between items-center navbar`}>
       <img src={navlogo} alt="rexrox" className='w-[100px] h-[20px]' />
 
       <ul className='list-none sm:flex hidden justify-center items-center flex-1 gap-10  '>

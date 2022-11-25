@@ -23,7 +23,8 @@ const AddProduct = () => {
       email: user?.email,
       purchaseyear: data.purchaseyear,
       originalprice: data.originalprice,
-      condition: data.condition
+      condition: data.condition,
+      postdate: new Date().toLocaleString()
     }
 
 

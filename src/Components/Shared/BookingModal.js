@@ -51,7 +51,7 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal">
 
-        <div className="modal-box w-11/12 max-w-2xl relative">
+        <div className="modal-box w-11/12  max-w-2xl relative">
           <label htmlFor="booking-modal" className="absolute z-10 text-center right-4 top-4 rounded-full bg-black p-2.5  cursor-pointer text-sm text-white"><MdOutlineClose className='text-lg' /></label>
 
           <div>
@@ -63,13 +63,14 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
 
               <div className="relative mx-auto max-w-screen-2xl">
                 <div className="py-0">
-                  <div className="mx-auto max-w-lg px-4 lg:px-8">
+                  <div className="mx-auto max-w-2xl px-4 lg:px-8">
 
                     <form
                       onSubmit={handleSubmit(handleBookedItem)}
                       className="grid grid-cols-6 gap-4">
                       {/* name */}
                       <div className="col-span-6 ">
+                        <h2 className='text-green-900 font-semibold text-center'>Add Product</h2>
                         <label className="mb-1 block text-sm text-gray-600" htmlFor="first_name">
                           Full Name
                         </label>
@@ -165,9 +166,9 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
                           <button
                             type='submit'
                             onClick={handleBookItem}
-                            className='block text-center w-full rounded-lg bg-black p-2.5 text-sm text-white'
+                            className='block text-center  rounded-lg bg-gradient-to-r from-green-700 to-[#030850] w-1/2 p-2.5 text-sm text-white'
                           >
-                            Pay Now
+                            Book Now
                           </button>
 
 

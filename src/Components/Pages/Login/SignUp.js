@@ -7,6 +7,7 @@ import { GoMarkGithub } from 'react-icons/go';
 import { AuthContext } from '../../../AuthContexts/Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
+import useVerifyToken from '../../../hooks/useVerifyToken';
 
 
 const SignUp = () => {
@@ -14,8 +15,15 @@ const SignUp = () => {
   const [photolink, setPhotoLink] = useState('');
   const [accountType, setAccountType] = useState('User')
   const { googleLogin, registerNewAccount, updateUserProfile, user } = useContext(AuthContext);
+  const [useremail, setuseremail] = useState('')
+  const [token] = useVerifyToken(useremail)
   const imgbbHostKey = process.env.REACT_APP_imgbb_key;
   const navigate = useNavigate();
+
+  if (token) {
+    console.log(token);
+    navigate('/')
+  }
 
 
   const hostPhoto = (image, formData) => {
@@ -27,7 +35,6 @@ const SignUp = () => {
       })
         .then(res => res.json())
         .then(imgData => {
-          console.log(imgData);
           const photoURL = imgData.data.url;
           setPhotoLink(photoURL)
         })
@@ -76,17 +83,18 @@ const SignUp = () => {
               .then(res => res.json())
               .then(result => {
                 toast.success('Registration Successfully')
-                console.log(user?.email);
-                navigate('/')
               })
+            setuseremail(data?.email)
           })
+
           .catch(e => console.log(e))
-
-
 
       })
       .catch(e => console.log(e))
   }
+
+
+
 
 
 
@@ -110,12 +118,17 @@ const SignUp = () => {
         })
           .then(res => res.json())
           .then(result => {
+            // getUserJwtToken(googleUser?.email)
             navigate('/')
             toast.success(`Hey ${googleUser?.displayName} Welcome to the Website !  `)
           })
       })
       .catch(e => console.log(e))
   }
+
+
+
+
 
 
 

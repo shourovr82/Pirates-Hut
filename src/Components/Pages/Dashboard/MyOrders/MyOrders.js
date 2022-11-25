@@ -6,18 +6,31 @@ import MyOrderItem from './MyOrderItem';
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [myOrders, setMyOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem('accessToken')}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setMyOrders(data)
+
+    const accessToken = localStorage.getItem('accessToken');
+
+
+    if (user?.email && accessToken) {
+
+      fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
+        headers: {
+          authorization: `bearer ${accessToken}`
+        }
       })
+        .then(res => res.json())
+        .then(data => {
+          if (data) {
+            console.log(data);
+            setMyOrders(data)
+          }
+        })
+    }
+
+
 
   }, [user?.email])
 
@@ -32,7 +45,7 @@ const MyOrders = () => {
 
         <div className="grid grid-cols-2 -m-4">
 
-          {
+          {myOrders &&
             myOrders.map(myorder => <MyOrderItem
               key={myorder._id}
               myorder={myorder}

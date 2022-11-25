@@ -1,7 +1,6 @@
 import React from 'react';
 
 const MyOrderItem = ({ myorder }) => {
-  console.log(myorder);
   const { buyerName, category, phone, price, title, _id } = myorder;
   return (
     <div className="bg-gray-100 p-6 rounded-lg">

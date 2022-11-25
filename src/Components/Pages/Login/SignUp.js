@@ -13,17 +13,29 @@ import useVerifyToken from '../../../hooks/useVerifyToken';
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [photolink, setPhotoLink] = useState('');
-  const [accountType, setAccountType] = useState('User')
+  const [accountType, setAccountType] = useState('Buyer')
   const { googleLogin, registerNewAccount, updateUserProfile, user } = useContext(AuthContext);
   const [useremail, setuseremail] = useState('')
   const [token] = useVerifyToken(useremail)
   const imgbbHostKey = process.env.REACT_APP_imgbb_key;
   const navigate = useNavigate();
 
-  if (token) {
-    console.log(token);
-    navigate('/')
+
+  const getUserJwtToken = email => {
+    console.log(email);
+    fetch(`http://localhost:5000/getjwt?email=${email}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.accessToken) {
+          localStorage.setItem('accessToken', data.accessToken)
+          navigate('/')
+        }
+      })
   }
+
+
+
 
 
   const hostPhoto = (image, formData) => {
@@ -82,16 +94,18 @@ const SignUp = () => {
             })
               .then(res => res.json())
               .then(result => {
-                toast.success('Registration Successfully')
+                getUserJwtToken(email)
               })
-            setuseremail(data?.email)
           })
-
           .catch(e => console.log(e))
 
       })
       .catch(e => console.log(e))
   }
+
+
+
+
 
 
 
@@ -118,11 +132,15 @@ const SignUp = () => {
         })
           .then(res => res.json())
           .then(result => {
-            // getUserJwtToken(googleUser?.email)
-            navigate('/')
+            console.log(result);
+
+            getUserJwtToken(googleUser?.email)
             toast.success(`Hey ${googleUser?.displayName} Welcome to the Website !  `)
+
           })
+
       })
+
       .catch(e => console.log(e))
   }
 
@@ -159,13 +177,13 @@ const SignUp = () => {
 
                 <input
                   {...register("name")}
-                  type="text" placeholder=' Full Name' className='py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' />
+                  type="text" placeholder=' Full Name' className='py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
 
                 <label className="custom-file-upload py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  text-slate-400">
 
                   <input
                     {...register("image")}
-                    type="file" id='photo' className='input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' />
+                    type="file" id='photo' className='input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
                   Upload Photo
 
 
@@ -176,11 +194,11 @@ const SignUp = () => {
 
                 <input
                   {...register("email")}
-                  type="email" placeholder='Type Your Email' className='py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' />
+                  type="email" placeholder='Type Your Email' className='py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
 
                 <input
                   {...register("password")}
-                  type="password" placeholder='Type Your Password' className='py-2 px-4 rounded-md bg-[#103f6b25]   border-spacing-3 border-b   input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' />
+                  type="password" placeholder='Type Your Password' className='py-2 px-4 rounded-md bg-[#103f6b25]   border-spacing-3 border-b   input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
 
                 <div >
 
@@ -190,10 +208,10 @@ const SignUp = () => {
 
                     <div className="form-control border px-2 pl-5 border-[#35c0405b] rounded">
                       <label className="label cursor-pointer">
-                        <span className="label-text text-white">User</span>
+                        <span className="label-text text-white">Buyer</span>
                         <input
-                          onClick={() => setAccountType('User')}
-                          type="radio" name="radio-10" className="radio ml-2 bg-white checked:bg-green-700" defaultChecked={accountType === 'User'} />
+                          onClick={() => setAccountType('Buyer')}
+                          type="radio" name="radio-10" className="radio ml-2 bg-white checked:bg-green-700" defaultChecked />
                       </label>
                     </div>
 
@@ -202,13 +220,10 @@ const SignUp = () => {
                         <span className="label-text text-white">Seller</span>
                         <input
                           onClick={() => setAccountType('Seller')}
-                          type="radio" name="radio-10" className="radio ml-2 bg-white checked:bg-green-700" defaultChecked={accountType === 'Seller'} />
+                          type="radio" name="radio-10" className="radio ml-2 bg-white checked:bg-green-700" />
                       </label>
                     </div>
                   </div>
-
-
-
 
 
                   <div className='md:flex items-center justify-between gap-3'>

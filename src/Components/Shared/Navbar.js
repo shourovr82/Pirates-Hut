@@ -20,6 +20,7 @@ const Navbar = () => {
     logOut()
       .then(result => {
         toast.success('Successfully Logged Out')
+        localStorage.removeItem('accessToken')
       })
       .catch(e => console.log(e))
   }

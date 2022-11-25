@@ -1,25 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../AuthContexts/Contexts/AuthProvider';
 import Navbar from '../Components/Shared/Navbar';
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
-
-  const { data: users = [], isLoading, refetch } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => fetch(`http://localhost:5000/users?email=${user?.email}`)
-      .then(res => res.json())
-  })
+  const [currentUser, setCurrentUser] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users?email=${user?.email}`)
-      .then(res => res.json())
-      .then(result => {
-        console.log(result);
-      })
 
+    if (user?.email) {
+      fetch(`http://localhost:5000/users?email=${user?.email}`)
+        .then(res => res.json())
+        .then(result => {
+          setCurrentUser(result)
+        })
+    }
 
   }, [user?.email])
 
@@ -40,22 +37,31 @@ const DashboardLayout = () => {
         </div>
 
 
-
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu  w-80 text-base-content bg-red-400">
             <ul className="menu p-4 w-80 text-base-content">
-              <li><Link to="/dashboard/myorders">My Orders</Link></li>
+              {
+                currentUser[0]?.accountType === 'Buyer' && <>
+                  <li><Link to="/dashboard/myorders">My Orders</Link></li>
+                </>
+              }
+              {
+                currentUser[0]?.accountType === 'Seller' && <>
+                  <li><Link to="/dashboard/addProduct">Add a Product</Link></li>
+                  <li><Link to="/dashboard/myproducts">My Products</Link></li>
+                </>
+              }
+              {
+                currentUser[0]?.accountType === 'Admin' && <>
+                  <li><Link to="/dashboard/allsellers">All Sellers</Link></li>
+                  <li><Link to="/dashboard/allbuyers">All Buyers</Link></li>
+                  <li><Link to="/dashboard/reporteditems">Reported Items</Link></li>
+                </>
+              }
 
 
 
-
-
-              <li><Link to="/dashboard/addProduct">Add a Product</Link></li>
-              <li><Link to="/dashboard/allsellers">All Sellers</Link></li>
-              <li><Link to="/dashboard/allbuyers">All Buyers</Link></li>
-              <li><Link to="/dashboard/reporteditems">Reported Items</Link></li>
-              <li><Link to="/dashboard/myproducts">My Products</Link></li>
             </ul>
 
           </ul>

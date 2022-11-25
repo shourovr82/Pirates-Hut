@@ -10,7 +10,6 @@ const AllSellers = () => {
       .then(res => res.json())
   })
 
-  console.log(sellers);
 
 
   return (

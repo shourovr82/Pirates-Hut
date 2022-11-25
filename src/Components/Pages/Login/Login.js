@@ -16,28 +16,6 @@ const Login = () => {
   const [token] = useVerifyToken(loginUserEmail);
   const navigate = useNavigate();
 
-  if (token) {
-    navigate('/')
-  }
-
-
-  const handleLogin = (data) => {
-    const email = data.email;
-    const password = data.password;
-    loginUser(email, password)
-      .then(result => {
-        const user = result.user;
-        console.log(user);
-        setLoginUserEmail(user?.email)
-        // getUserJwtToken(email)
-        // navigate('/')
-        toast.success(`Hi ${user?.displayName}, Welcome to our website !`)
-
-      })
-      .catch(e => console.log(e))
-  }
-
-
 
   const getUserJwtToken = email => {
     console.log(email);
@@ -47,9 +25,30 @@ const Login = () => {
         console.log(data);
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken)
+          navigate('/')
         }
       })
   }
+
+
+
+
+
+  const handleLogin = (data) => {
+    const email = data.email;
+    const password = data.password;
+    loginUser(email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        getUserJwtToken(user?.email);
+        toast.success(`Hi ${user?.displayName}, Welcome to our website !`)
+      })
+      .catch(e => console.log(e))
+  }
+
+
+
 
 
 

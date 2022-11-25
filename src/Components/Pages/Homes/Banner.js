@@ -2,13 +2,13 @@ import React from 'react';
 
 const Banner = () => {
   return (
-    <div className='  mt-[-100px] h-[105vh]'>
+    <div className='  primary-bg mt-[-100px] h-[106vh]'>
       <br />
       <br />
       <br />
       <br />
       <br />
-      <div className='flex justify-center items-center mt-28 text-center'>
+      <div className='flex  justify-center items-center mt-28 text-center'>
 
 
         <div className='flex flex-col gap-5 justify-center items-center'>

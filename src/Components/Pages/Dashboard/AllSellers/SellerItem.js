@@ -47,7 +47,7 @@ const SellerItem = ({ seller, refetch }) => {
       btn btn-circle btn-outline
           "><MdOutlineClose className='text-2xl' /></label>
       </th>
-      <div>
+      <>
         {/* The button to open modal */}
 
 
@@ -74,7 +74,7 @@ const SellerItem = ({ seller, refetch }) => {
         }
 
 
-      </div>
+      </>
 
 
 

@@ -3,6 +3,7 @@ import React from 'react';
 const MyProductItem = ({ product }) => {
   console.log(product);
   const { title, price, category, email } = product;
+
   return (
     <tr>
 
@@ -17,7 +18,7 @@ const MyProductItem = ({ product }) => {
         <strong
           className="rounded bg-amber-100 px-3 py-1.5 text-xs font-medium text-amber-700"
         >
-          Partially Refunded
+          Available
         </strong>
       </td>
     </tr>

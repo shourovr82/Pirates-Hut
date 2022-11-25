@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -22,6 +23,7 @@ const AddProduct = () => {
       email: user?.email,
       purchaseyear: data.purchaseyear,
       originalprice: data.originalprice,
+      condition: data.condition
     }
 
 
@@ -38,14 +40,15 @@ const AddProduct = () => {
         toast.success('Product added Successfull')
         navigate('/dashboard/myproducts')
       })
-
-
-
-
-
-
-
   }
+
+  const { data: categories = [], isLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => fetch('http://localhost:5000/categories')
+      .then(res => res.json())
+  })
+
+
 
 
   return (
@@ -59,7 +62,7 @@ const AddProduct = () => {
           className="space-y-4">
 
           {/*  name */}
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-2 gap-4">
 
             <div>
               <label className="mb-1 block text-sm text-gray-600" htmlFor="name">
@@ -71,6 +74,18 @@ const AddProduct = () => {
                 placeholder="Product Name"
                 type="text"
                 id="name"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm text-gray-600" htmlFor="condition">
+                Condition Type
+              </label>
+              <input
+                {...register("condition")}
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                placeholder="Condition Type"
+                type="text"
+                id="condition"
               />
             </div>
 
@@ -142,32 +157,21 @@ const AddProduct = () => {
 
             <div>
               <label className="mb-1 block text-sm text-gray-600" htmlFor="condition">
-                Condition Type
+                Select Category
               </label>
+
               <select
                 {...register("category")}
                 name='category'
                 className="py-3  px-3 rounded-md select-bordered border w-full ">
-                <option selected value={'laptops'}>laptops</option>
-                <option value={'Phones'}>Phones</option>
-                <option value={'fragrances'}>fragrances</option>
+                {
+                  categories.map((category =>
+                    <option selected value={category.category}>{category.category}</option>
+                  ))
+                }
               </select>
 
-
-
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div>
               <label className="mb-1 block text-sm text-gray-600" htmlFor="location">

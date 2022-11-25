@@ -8,9 +8,6 @@ import HomeCard from './Homecard';
 const Home = () => {
 
 
-
-
-
   return (
     <div className=' primary-bg' >
 

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import AllBuyerItem from './AllBuyerItem';
 
 const AllBuyers = () => {
 
@@ -9,8 +10,6 @@ const AllBuyers = () => {
     queryFn: () => fetch('http://localhost:5000/allbuyers')
       .then(res => res.json())
   })
-
-
 
 
   return (
@@ -30,18 +29,26 @@ const AllBuyers = () => {
               </thead>
               <tbody>
 
-                {/* {
-                  sellers.map(seller => <SellerItem
-                    key={seller._id}
-                    seller={seller}
-                    refetch={refetch}
-                  ></SellerItem>)
-                } */}
+                {
+                  buyers.map(buyer =>
+                    <AllBuyerItem
+                      key={buyer._id}
+                      buyer={buyer}
+                      refetch={refetch}
+                    >
+
+
+                    </AllBuyerItem>
+
+
+                  )
+
+                }
 
               </tbody>
             </table>
           </div>
-          : ' No Sellers Added'
+          : ' No Buyers  Added'
       }
     </div>
   );

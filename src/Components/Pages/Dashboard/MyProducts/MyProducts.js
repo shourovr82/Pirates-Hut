@@ -10,12 +10,6 @@ const MyProducts = () => {
   const [myProducts, setMyProducts] = useState([])
   const [reload, setReload] = useState(false)
 
-  // const { data: myProducts, isLoading, refetch } = useQuery({
-  //   queryKey: ['myProducts'],
-  //   queryFn: () => fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
-  //     .then(res => res.json())
-  // })
-
 
   useEffect(() => {
     if (user?.email) {

@@ -3,6 +3,8 @@ import Products from "../Components/Pages/Category/Products/Products";
 import AddProduct from "../Components/Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../Components/Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Components/Pages/Dashboard/AllSellers/AllSellers";
+import Alluser from "../Components/Pages/Dashboard/AllUsers/Alluser";
+import AllUsers from "../Components/Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../Components/Pages/Dashboard/Dashboard";
 import MyOrders from "../Components/Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Components/Pages/Dashboard/MyProducts/MyProducts";
@@ -11,6 +13,7 @@ import Login from "../Components/Pages/Login/Login";
 import SignUp from "../Components/Pages/Login/SignUp";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Main from "../Layouts/Main";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/myproducts',
-        element: <MyProducts></MyProducts>
+        element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>
       },
 
       {
@@ -65,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/allbuyers',
         element: <AllBuyers></AllBuyers>
+      },
+      {
+        path: '/dashboard/allusers',
+        element: <AllUsers></AllUsers>
       },
     ]
   }

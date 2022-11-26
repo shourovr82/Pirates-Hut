@@ -22,11 +22,9 @@ const SignUp = () => {
 
 
   const getUserJwtToken = email => {
-    console.log(email);
     fetch(`http://localhost:5000/getjwt?email=${email}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken)
           navigate('/')

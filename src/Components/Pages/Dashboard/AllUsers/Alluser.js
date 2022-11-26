@@ -1,56 +1,12 @@
 import React, { useState } from 'react';
-import toast from 'react-hot-toast';
 import { MdOutlineClose } from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
 
-
-const SellerItem = ({ seller, refetch }) => {
-  console.log(seller);
+const Alluser = ({ refetch, users }) => {
   const [deleteConfirm, setDeleteConfirm] = useState(null);
-  const { name, photoURL, accountType, verification } = seller;
+  const { accountType, name, photoURL, verification, _id, email } = users;
 
-
-  const handleDeleteSeller = () => {
-
-    fetch(`http://localhost:5000/deleteseller/${seller._id}`, {
-      method: 'DELETE',
-      headers: {}
-    })
-      .then(res => res.json())
-      .then(data => {
-        refetch();
-        toast.success('Successfully deleted Seller')
-      })
-  }
-
-  const handleUserVerify = () => {
-    fetch(`http://localhost:5000/verifyuser/${seller._id}`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        refetch();
-        fetch(`http://localhost:5000/verifyuserproducts/${seller?.email}`, {
-          method: 'PUT',
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-          .then(res => res.json())
-          .then(data => {
-            toast.success('Successfully Veified')
-          })
-
-      })
-
-
-
-
-  }
-
+  console.log(users);
   return (
     <tr>
       <td>
@@ -68,25 +24,31 @@ const SellerItem = ({ seller, refetch }) => {
         className='flex justify-center  items-center mt-2'
       >
         <button
-          onClick={handleUserVerify}
-          disabled={verification}
-          className='flex disabled:cursor-not-allowed w-2/3 gap-3  pl-3 items-center hover:bg-emerald-900 cursor-pointer    border  py-1 rounded bg-emerald-700 text-white  justify-center'  >{verification ? verification : 'Verify Now'}  <RiAdminFill className='text-2xl' /></button></td>
+          // onClick={handleUserVerify}
+          disabled={accountType === 'Admin'}
+          className='flex disabled:cursor-not-allowed disabled:bg-white disabled:text-black disabled:pr-3 disabled:w-10/12 pr-3  gap-3  pl-3 items-center hover:bg-emerald-900 cursor-pointer    border  py-1 rounded bg-emerald-700 text-white  justify-center'  >
+
+          {accountType === 'Admin' ? accountType : 'Make Admin'}
+
+          <RiAdminFill className='text-2xl' /></button></td>
 
       <td>{accountType}</td>
 
-      <th>
-
+      <td>
         <label
-          onClick={() => setDeleteConfirm(seller)}
+          // onClick={() => setDeleteConfirm(seller)}
           htmlFor="my-modal-3" className="  
       btn btn-sm hover:bg-red-600 btn-circle btn-outline
           "><MdOutlineClose className='text-2xl' /></label>
-      </th>
-      <>
-        {/* The button to open modal */}
+      </td>
+      <td>{email}</td>
 
 
-        {deleteConfirm &&
+      {/* <> */}
+      {/* The button to open modal
+
+
+      {/* {deleteConfirm &&
           <>
             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
             <div className="modal">
@@ -106,19 +68,17 @@ const SellerItem = ({ seller, refetch }) => {
 
             </div></>
 
-        }
+        } */}
 
 
-      </>
+      {/* </> */}
 
 
 
 
 
-    </tr>
-
-
+    </tr >
   );
 };
 
-export default SellerItem;
+export default Alluser;

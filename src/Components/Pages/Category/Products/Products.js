@@ -9,7 +9,7 @@ const Products = () => {
   const { category } = data;
 
 
-  const { data: products = [], isLoading } = useQuery({
+  const { data: products = [], isLoading, refetch } = useQuery({
     queryKey: ['categories'],
     queryFn: () => fetch(`http://localhost:5000/products/${category}`)
       .then(res => res.json())
@@ -39,6 +39,7 @@ const Products = () => {
             {products?.map(product => <Product
               key={product._id}
               product={product}
+              refetch={refetch}
             ></Product>)}
 
 

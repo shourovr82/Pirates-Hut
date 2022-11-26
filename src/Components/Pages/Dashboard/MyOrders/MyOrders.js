@@ -4,7 +4,7 @@ import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import MyOrderItem from './MyOrderItem';
 
 const MyOrders = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [myOrders, setMyOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +21,12 @@ const MyOrders = () => {
           authorization: `bearer ${accessToken}`
         }
       })
-        .then(res => res.json())
+        .then(res => {
+          if (res.status === 401 || res.status === 403) {
+            logOut();
+          }
+          return res.json()
+        })
         .then(data => {
           if (data) {
             console.log(data);

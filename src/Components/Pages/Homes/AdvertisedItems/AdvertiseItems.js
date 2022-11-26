@@ -4,8 +4,6 @@ const AdvertiseItems = ({ items }) => {
 
   const { advertise, availibility, category, condition, description, email, location, originalprice, phone, postdate, price, purchaseyear, title
   } = items;
-  console.log(items);
-
 
 
   return (

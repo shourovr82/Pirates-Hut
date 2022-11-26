@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -8,41 +8,79 @@ import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const [photolink, setPhotoLink] = useState('');
+  const imgbbHostKey = process.env.REACT_APP_imgbb_key;
   const { register, handleSubmit, formState: { errors } } = useForm();
 
+
+  const hostPhoto = (image, formData) => {
+
+  }
+
+
+
+
+
   const hanleAddProduct = (data) => {
+    const image = data.image[0];
+    //  host photo
+    if (image) {
+      const formData = new FormData();
+      formData.append('image', image);
+      if (formData) {
+        // hostPhoto(image, formData);
+        const url = `https://api.imgbb.com/1/upload?key=${imgbbHostKey}`;
+        if (image) {
+          fetch(url, {
+            method: 'POST',
+            body: formData
+          })
+            .then(res => res.json())
+            .then(imgData => {
+              const photoURL = imgData.data?.url;
+              console.log(imgData);
 
-    const newProduct = {
-      category: data.category,
-      location: data.location,
-      phone: data.phone,
-      price: data.price,
-      title: data.title,
-      description: data.description,
-      email: user?.email,
-      purchaseyear: data.purchaseyear,
-      originalprice: data.originalprice,
-      condition: data.condition,
-      postdate: new Date().toLocaleString(),
-      availibility: 'available',
-      advertise: ''
+              const newProduct = {
+                category: data.category,
+                location: data.location,
+                phone: data.phone,
+                price: data.price,
+                title: data.title,
+                sellername: user?.displayName,
+                description: data.description,
+                email: user?.email,
+                purchaseyear: data.purchaseyear,
+                originalprice: data.originalprice,
+                condition: data.condition,
+                postdate: new Date().toLocaleString(),
+                availibility: 'available',
+                image: photoURL,
+                brand: data?.brand,
+                color: data?.color,
+              }
+
+              fetch('http://localhost:5000/addproducts', {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                body: JSON.stringify(newProduct)
+              })
+                .then(res => res.json())
+                .then(result => {
+                  console.log(result);
+                  toast.success('Product added Successfull')
+                  navigate('/dashboard/myproducts')
+                })
+              // setPhotoLink(photoURL)
+            })
+        }
+
+      }
     }
-    console.log(data.category);
 
-    fetch('http://localhost:5000/addproducts', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(newProduct)
-    })
-      .then(res => res.json())
-      .then(result => {
-        console.log(result);
-        toast.success('Product added Successfull')
-        navigate('/dashboard/myproducts')
-      })
+
+
   }
 
   const { data: categories = [], isLoading } = useQuery({
@@ -152,6 +190,52 @@ const AddProduct = () => {
               />
             </div>
           </div>
+          {/*  brand, color */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-1 block text-sm text-gray-600" htmlFor="brand">
+                Product Brand
+              </label>
+              <input
+                {...register("brand")}
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                type="text"
+                id="brand"
+                placeholder='Product Brand'
+              />
+            </div>
+
+
+            <div>
+              <label className="mb-1 block text-sm text-gray-600" htmlFor="color">
+                Product Color
+              </label>
+              <input
+                {...register("color")}
+                className="w-full rounded-lg border-gray-200 p-3 text-sm border"
+                type="text"
+                id="color"
+                placeholder='Product Color'
+              />
+            </div>
+          </div>
+          {/*  Product Image */}
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <label className="mb-1 block text-sm text-gray-600" htmlFor="image">
+                Product Photo
+              </label>
+
+              <input
+                {...register("image")}
+                type="file" id='image' className='input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
+              Upload Photo
+            </div>
+
+          </div>
+
+
+
 
 
           {/* conditions============================ */}
@@ -231,7 +315,7 @@ const AddProduct = () => {
         </form>
 
 
-      </div>
+      </div >
 
 
     </section >

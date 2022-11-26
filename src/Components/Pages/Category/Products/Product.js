@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import BookingModal from '../../../Shared/BookingModal';
 import { BsBookmarkPlusFill } from 'react-icons/bs';
+import { MdVerified } from "react-icons/md";
+import { BsFillCartPlusFill } from "react-icons/bs";
 
 
 
-
-const Product = ({ product }) => {
+const Product = ({ product, refetch }) => {
   const [modalitems, setModalitems] = useState(null)
   const { user } = useContext(AuthContext);
   const { category,
@@ -24,13 +25,44 @@ const Product = ({ product }) => {
     Location,
     availibilty,
     postdate,
-    sellername, resolution
-
+    sellername, resolution, verification,
+    productId: _id
   } = product;
+  console.log(product);
+
   const [bookedItem, setBookedItem] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  console.log(product);
+  const handleAddToWishList = (product) => {
+
+    fetch(`http://localhost:5000/addtowishlist`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(product)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+
+        fetch(`http://localhost:5000/wishlistproduct/${product?._id}`, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            refetch();
+          })
+
+
+      })
+  }
+
+
 
 
   return (
@@ -47,26 +79,37 @@ const Product = ({ product }) => {
         </div>
 
 
-        <div className='mb-3'>
-          <h2 className='text-emerald-700 font-bold text-xl'>Price : ${price}</h2>
-          <p>For sale by <strong>{sellername}</strong></p>
+        <div className='mb-3 flex justify-between items-center '>
+          <div className=''>      <h2 className='text-emerald-700 font-bold text-xl'>Price : ${price}</h2>
+            <p>For sale by <strong>{sellername}    {verification && <span className="badge border-0 bg-[#0087bd2f] py-3"><MdVerified className='text-lg text-blue-600' /></span>}
+            </strong></p></div>
+
+          <div>
+            <button
+              onClick={() => handleAddToWishList(product)}
+              disabled={product?.wishlist}
+              className='btn-outline hover:bg-red-600 text-xs hover:border-white btn btn-sm'>
+              <BsFillCartPlusFill className='text-2xl mr-2' />
+              WishList
+            </button></div>
+
         </div>
 
         <div className='my-4'>
           <div>
-            <h1 className='flex justify-between w-1/2'><span>Condition : </span> <span>{condition}</span></h1>
+            <h1 className='flex justify-between '><span>Condition : </span> <span>{condition}</span></h1>
           </div>
           <div>
-            <h1 className='flex justify-between w-1/2'><span>Brand : </span> <span>{brand}</span></h1>
+            <h1 className='flex justify-between '><span>Brand : </span> <span>{brand}</span></h1>
           </div>
           <div>
-            <h1 className='flex justify-between w-1/2'><span>Color : </span> <span>{color}</span></h1>
+            <h1 className='flex justify-between '><span>Color : </span> <span>{color}</span></h1>
           </div>
           <div>
-            <h1 className='flex justify-between w-1/2'><span>Purchase Year : </span> <span>{purchaseyear}</span></h1>
+            <h1 className='flex justify-between '><span>Purchase Year : </span> <span>{purchaseyear}</span></h1>
           </div>
           <div>
-            <h1 className='flex justify-between w-1/2'><span>Camera Resolution  : </span> <span>{resolution}</span></h1>
+            <h1 className='flex justify-between '><span>Camera Resolution  : </span> <span>{resolution}</span></h1>
           </div>
 
 

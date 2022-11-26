@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Login.css'
 import { RiLoginCircleFill } from 'react-icons/ri';
 import { AuthContext } from '../../../AuthContexts/Contexts/AuthProvider';
@@ -15,6 +15,9 @@ const Login = () => {
   const [loginUserEmail, setLoginUserEmail] = useState('')
   const [token] = useVerifyToken(loginUserEmail);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
 
 
   const getUserJwtToken = email => {

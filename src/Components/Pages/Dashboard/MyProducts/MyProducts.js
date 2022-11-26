@@ -1,22 +1,72 @@
 import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
+import DeleteMyProductModal from './DeleteMyProductModal';
 import MyProductItem from './MyProductItem';
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
-  const [myProducts, setMyProducts] = useState([]);
+  const [deleteConfirm, setDeleteConfirm] = useState(null)
+  const [myProducts, setMyProducts] = useState([])
+  const [reload, setReload] = useState(false)
 
+  // const { data: myProducts, isLoading, refetch } = useQuery({
+  //   queryKey: ['myProducts'],
+  //   queryFn: () => fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
+  //     .then(res => res.json())
+  // })
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
+    if (user?.email) {
+      fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
+        .then(res => res.json())
+        .then(result => {
+          console.log(result);
+          setMyProducts(result)
+          setReload(false)
+        })
+    }
+
+
+  }, [user?.email, reload])
+
+
+  //  delete my product
+
+
+  const handleDeleteProduct = (deleteConfirm) => {
+    console.log(deleteConfirm);
+
+    fetch(`http://localhost:5000/deletemyproduct/${deleteConfirm._id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
       .then(res => res.json())
-      .then(result => {
-        setMyProducts(result)
+      .then(data => {
+        console.log(data);
+        toast.success('Successfully deleted Seller')
+        setDeleteConfirm(null)
+        setReload(true)
+        // fetch
+        if (data?.acknowledged) {
+          fetch(`http://localhost:5000/deleteadvertiseproduct/${user?.email}`, {
+            method: 'DELETE',
+            headers: {
+              'content-type': 'application/json'
+            },
+          })
+            .then(res => res.json())
+            .then(result => {
+              console.log(result);
+            })
+        }
+
+
       })
-  }, [user?.email])
-
-
+  }
 
 
 
@@ -24,7 +74,7 @@ const MyProducts = () => {
     <div>
 
       {
-        myProducts.length > 0 &&
+        myProducts?.length > 0 &&
         <div className="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
           <table className="min-w-full divide-y divide-gray-200 text-sm">
             <thead className="bg-gray-100">
@@ -94,6 +144,16 @@ const MyProducts = () => {
                 >
                   Status
                 </th>
+                <th
+                  className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Advertisement
+                </th>
+                <th
+                  className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                >
+                  Delete
+                </th>
               </tr>
             </thead>
 
@@ -106,6 +166,7 @@ const MyProducts = () => {
               {
                 myProducts.map(myProduct => <MyProductItem
                   key={myProduct._id}
+                  setDeleteConfirm={setDeleteConfirm}
                   product={myProduct}
                 ></MyProductItem>)
               }
@@ -113,6 +174,13 @@ const MyProducts = () => {
 
             </tbody>
           </table>
+          {
+            deleteConfirm && <DeleteMyProductModal
+              deleteConfirm={deleteConfirm}
+              setDeleteConfirm={setDeleteConfirm}
+              handleDeleteProduct={handleDeleteProduct}
+            ></DeleteMyProductModal>
+          }
         </div>
       }
 

@@ -24,9 +24,11 @@ const AddProduct = () => {
       purchaseyear: data.purchaseyear,
       originalprice: data.originalprice,
       condition: data.condition,
-      postdate: new Date().toLocaleString()
+      postdate: new Date().toLocaleString(),
+      availibility: 'available',
+      advertise: ''
     }
-
+    console.log(data.category);
 
     fetch('http://localhost:5000/addproducts', {
       method: 'POST',
@@ -166,8 +168,10 @@ const AddProduct = () => {
                 name='category'
                 className="py-3  px-3 rounded-md select-bordered border w-full ">
                 {
-                  categories.map((category =>
-                    <option selected value={category.category}>{category.category}</option>
+                  categories.map(((category, index) =>
+                    <option
+                      key={index}
+                    >{category.category}</option>
                   ))
                 }
               </select>
@@ -216,9 +220,9 @@ const AddProduct = () => {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>

@@ -73,28 +73,6 @@ const MyOrders = () => {
       }
     </div >
 
-    // <div>
-    //   <section className="text-gray-600 body-font">
-
-
-
-    //     <div className="grid grid-cols-2 -m-4">
-    //       {myOrders &&
-    //         myOrders.map(myorder => <MyOrderItem
-    //           key={myorder._id}
-    //           myorder={myorder}
-    //         ></MyOrderItem>)
-    //       }
-
-
-
-
-
-
-
-    //     </div>
-    //   </section>
-    // </div>
   );
 };
 

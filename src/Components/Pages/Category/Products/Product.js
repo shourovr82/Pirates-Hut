@@ -26,27 +26,31 @@ const Product = ({ product, refetch }) => {
     Location,
     availibilty,
     postdate,
-    sellername, resolution, verification,
-    productId: _id
+    sellername, resolution, verification, originalprice
   } = product;
-
-  console.log(product);
+  const buyeremail = user?.email;
+  const productId = 'product'?._id;
+  const newProducts = { ...product, buyeremail, productId }
+  console.log(newProducts);
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const handleAddToWishList = (product) => {
-
-    fetch(`http://localhost:5000/addtowishlist`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(product)
-    })
-      .then(res => res.json())
-      .then(data => {
-        toast.success('Successfully added to Wishlist')
+  const handleAddToWishList = () => {
+    if (user?.email) {
+      fetch(`http://localhost:5000/addtowishlist`, {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(newProducts)
       })
+        .then(res => res.json())
+        .then(data => {
+          toast.success('Successfully added to Wishlist')
+        })
+    }
+
+
   }
 
 
@@ -67,14 +71,14 @@ const Product = ({ product, refetch }) => {
 
 
         <div className='mb-3 flex justify-between items-center '>
-          <div className=''>      <h2 className='text-emerald-700 font-bold text-xl'>Price : ${price}</h2>
+          <div className=''>      <h2 className='text-emerald-700 font-bold text-xl'>Resale Price : ${price}</h2>
             <p>For sale by <strong>{sellername}    {verification && <span className="badge border-0 bg-[#0087bd2f] py-3"><MdVerified className='text-lg text-blue-600' /></span>}
             </strong></p></div>
 
           <div>
             <button
               onClick={() => handleAddToWishList(product)}
-              className='btn-outline hover:bg-red-600 text-xs hover:border-white btn btn-sm'>
+              className='btn-outline hover:bg-green-700 text-xs hover:border-white btn btn-sm'>
               <BsFillCartPlusFill className='text-2xl mr-2' />
               WishList
             </button></div>
@@ -96,6 +100,9 @@ const Product = ({ product, refetch }) => {
           </div>
           <div>
             <h1 className='flex justify-between '><span>Camera Resolution  : </span> <span>{resolution}</span></h1>
+          </div>
+          <div>
+            <h1 className='flex justify-between '><span>Original Price  :  </span> <span> <strong>${originalprice}</strong> </span></h1>
           </div>
 
 

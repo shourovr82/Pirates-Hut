@@ -4,11 +4,11 @@ import AdvertiseItems from './AdvertiseItems';
 
 const Advertise = () => {
   const { data: advertiseItems = [], isLoading, refetch } = useQuery({
-    queryKey: ['myProducts'],
+    queryKey: ['advertiseItems'],
     queryFn: () => fetch(`http://localhost:5000/advertisedItem`)
       .then(res => res.json())
   })
-
+  console.log(advertiseItems);
   return (
     <div>
       <section className="text-gray-600 body-font">

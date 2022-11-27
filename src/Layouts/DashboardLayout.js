@@ -43,6 +43,7 @@ const DashboardLayout = () => {
               {
                 currentUser[0]?.accountType === 'Buyer' && <>
                   <li><Link to="/dashboard/myorders">My Orders</Link></li>
+                  <li><Link to="/dashboard/wishlist">My Wishlist</Link></li>
                 </>
               }
               {

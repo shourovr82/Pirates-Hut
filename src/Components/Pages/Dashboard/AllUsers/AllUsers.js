@@ -1,11 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import Alluser from './Alluser';
 import { MdOutlineClose } from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
+import useAdmin from '../../../../hooks/useAdmin';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 
 const AllUsers = () => {
-
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext)
+  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
 
   const { data: allusers = [], isLoading, refetch } = useQuery({
     queryKey: ['allusers'],
@@ -16,9 +21,14 @@ const AllUsers = () => {
     })
       .then(res => res.json())
   })
-  console.log(allusers);
 
+  if (isAdminLoading) {
+    return <p>Loading</p>
+  }
 
+  if (!isAdmin) {
+    navigate('/')
+  }
 
 
   return (

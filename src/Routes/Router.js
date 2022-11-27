@@ -15,6 +15,7 @@ import Login from "../Components/Pages/Login/Login";
 import SignUp from "../Components/Pages/Login/SignUp";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Main from "../Layouts/Main";
+import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/allsellers',
-        element: <AllSellers></AllSellers>
+        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
       },
       {
         path: '/dashboard/allbuyers',

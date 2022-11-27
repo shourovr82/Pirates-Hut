@@ -3,6 +3,7 @@ import React from 'react';
 import AdvertiseItems from './AdvertiseItems';
 
 const Advertise = () => {
+
   const { data: advertiseItems = [], isLoading, refetch } = useQuery({
     queryKey: ['advertiseItems'],
     queryFn: () => fetch(`http://localhost:5000/advertisedItem`)
@@ -16,18 +17,38 @@ const Advertise = () => {
           <div className=" ">
 
             {advertiseItems.length > 0 &&
-              advertiseItems.map(advertise =>
-                <AdvertiseItems
-                  key={advertise._id}
-                  items={advertise}
-                ></AdvertiseItems>
-              )
+
+              <>
+                <div>
+                  <div className='flex justify-center'>
+                    <img src="https://i.ibb.co/qBG7hvN/360-F-117638965-ial9r-AQOoso-S8-Kim-B829rf-Gzpump-ILWr-removebg-preview.png" alt="" />
+                  </div>
+                  <div className='grid grid-cols-2'>
+                    {
+                      advertiseItems.map(advertise =>
+                        <AdvertiseItems
+                          key={advertise._id}
+                          items={advertise}
+                        ></AdvertiseItems>
+                      )
+                    }
+                  </div>
+
+                </div>
+
+              </>
+
+
+
+
+
+
             }
 
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 };
 

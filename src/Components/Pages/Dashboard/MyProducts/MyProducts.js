@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
+import useSeller from '../../../../hooks/useSeller';
 import DeleteMyProductModal from './DeleteMyProductModal';
 import MyProductItem from './MyProductItem';
 
@@ -9,14 +11,13 @@ const MyProducts = () => {
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [myProducts, setMyProducts] = useState([])
   const [reload, setReload] = useState(false)
-
+  const [isSeller, isSellerLoading] = useSeller(user?.email)
 
   useEffect(() => {
     if (user?.email) {
       fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
         .then(res => res.json())
         .then(result => {
-          console.log(result);
           setMyProducts(result)
           setReload(false)
         })
@@ -24,6 +25,13 @@ const MyProducts = () => {
 
 
   }, [user?.email, reload])
+
+  if (isSellerLoading) {
+    return <p>Laoding</p>
+  }
+  if (!isSeller) {
+    Navigate('/')
+  }
 
 
   //  delete my product

@@ -21,14 +21,12 @@ const Login = () => {
 
 
   const getUserJwtToken = email => {
-    console.log(email);
     fetch(`http://localhost:5000/getjwt?email=${email}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken)
-          navigate('/')
+          navigate(from, { replace: true });
         }
       })
   }
@@ -76,9 +74,7 @@ const Login = () => {
         })
           .then(res => res.json())
           .then(result => {
-            console.log(result);
             getUserJwtToken(googleUser?.email)
-            navigate('/')
             toast.success(`Hey ${googleUser?.displayName} Welcome to the Website !  `)
           })
       })

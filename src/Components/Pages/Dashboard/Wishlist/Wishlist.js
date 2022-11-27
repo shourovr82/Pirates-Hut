@@ -3,14 +3,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import WishlistItem from './WishlistItem';
+import spinner from '../../../../Assets/loading.svg'
 
 const Wishlist = () => {
   const { user } = useContext(AuthContext);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [deleted, setDeleted] = useState(null);
+  const [dataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
+    setDataLoading(true)
     if (user?.email) {
       fetch(`http://localhost:5000/wishlistitems/${user?.email}`)
         .then(res => res.json())
@@ -18,12 +21,13 @@ const Wishlist = () => {
           console.log(data);
           setWishlistItems(data)
           setDeleted(false)
+          setDataLoading(false)
         })
     }
   }, [user?.email, deleted])
 
   const handleDeleteWishlit = () => {
-    console.log(deleteConfirm);
+    setDataLoading(true)
     fetch(`http://localhost:5000/deletewishlist/${deleteConfirm._id}`, {
       method: 'DELETE',
       headers: {
@@ -35,7 +39,7 @@ const Wishlist = () => {
         setDeleted(true)
         setDeleteConfirm(null)
         toast.success('Wishlist Deleted Successfull')
-        console.log(result);
+        setDataLoading(false)
       })
 
 
@@ -45,6 +49,14 @@ const Wishlist = () => {
 
   return (
     <div>
+
+      <div className='flex justify-center'>
+        {
+          dataLoading &&
+          <img src={spinner} className='w-80' alt="" />
+        }
+      </div>
+
       {
         wishlistItems.length > 0 ?
           <div className="overflow-x-auto w-full">

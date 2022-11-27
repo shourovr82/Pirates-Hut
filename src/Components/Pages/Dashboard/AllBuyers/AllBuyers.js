@@ -1,9 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
+import useAdmin from '../../../../hooks/useAdmin';
 import AllBuyerItem from './AllBuyerItem';
 
 const AllBuyers = () => {
-
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext)
+  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
 
   const { data: buyers = [], isLoading, refetch } = useQuery({
     queryKey: ['buyers'],
@@ -15,6 +20,13 @@ const AllBuyers = () => {
       .then(res => res.json())
   })
 
+  if (isAdminLoading) {
+    return <p>Loading</p>
+  }
+
+  if (!isAdmin) {
+    navigate('/')
+  }
 
   return (
     <div>

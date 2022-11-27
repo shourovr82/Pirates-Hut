@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
+import spinner from '../../../../Assets/loading.svg'
 
 const CheckOutForm = ({ product }) => {
   const [cardError, setCardError] = useState('');
@@ -79,7 +80,7 @@ const CheckOutForm = ({ product }) => {
         productId: product.productId,
       }
       fetch('http://localhost:5000/payments', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'content-type': 'application/json',
           authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -88,8 +89,7 @@ const CheckOutForm = ({ product }) => {
       })
         .then(res => res.json())
         .then(data => {
-          console.log(data);
-          if (data.insertedId) {
+          if (data.acknowledged) {
             setSuccess('Congrats ! Your Payment completed');
             setTransactionId(paymentIntent.id);
           }

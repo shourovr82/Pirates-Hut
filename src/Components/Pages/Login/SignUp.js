@@ -130,7 +130,6 @@ const SignUp = () => {
         })
           .then(res => res.json())
           .then(result => {
-            console.log(result);
 
             getUserJwtToken(googleUser?.email)
             toast.success(`Hey ${googleUser?.displayName} Welcome to the Website !  `)

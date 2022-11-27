@@ -26,7 +26,6 @@ const MyOrders = () => {
         })
         .then(data => {
           if (data) {
-            console.log(data);
             setMyOrders(data)
             setLoading(false)
           }

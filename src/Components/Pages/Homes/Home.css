@@ -2,6 +2,10 @@
   background-image: linear-gradient(to right bottom, #0e643c, #0e643c, #00574b, #004852, #00394e, #002941, #032540, #08213f, #0f1d3d, #0f224d, #10265d, #142a6d, #1b2e7d);
 }
 
+.footer-bg {
+  background-image: linear-gradient(to top, #000e07, #000e07, #011311, #011a1d, #01151d, #000d14, #000e1a, #000f20, #010a1f, #01081a, #010a20fd, #010922, #02071f);
+}
+
 .button-color:hover {
   box-shadow: 0px 0px 10px 0px #15f81e4a;
   ;

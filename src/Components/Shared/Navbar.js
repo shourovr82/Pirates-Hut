@@ -32,9 +32,8 @@ const Navbar = () => {
 
   const navMenu = [
     { id: 'home', title: 'Home', path: '/' },
-    { id: 'features', title: 'Features', path: '/features' },
+    { id: 'blogs', title: 'Blogs', path: '/blogs' },
     { id: 'dashboard', title: 'Dashboard', path: '/dashboard' },
-    { id: 'clients', title: 'Clients', path: '/clients' },
   ]
 
   const changeBackground = () => {
@@ -49,19 +48,19 @@ const Navbar = () => {
 
   return (
     <div className={`w-full flex transparent  ${backgroundnav ? 'newnavbar ' : 'bg-gradient-to-r from-green-700 to-[#030850]'} py-2 justify-between items-center navbar`}>
-      <img src={navlogo} alt="rexrox" className='w-[100px] h-[20px]' />
+      <Link to='/'>
+        <img src={navlogo} alt="rexrox" className='w-[100px] h-[20px]' />
+      </Link>
+
 
       <ul className='list-none sm:flex hidden justify-center items-center flex-1 gap-10  '>
-        {navMenu.map((nav, index) => (
-          <li key={nav.id}
-            className={`font-poppins font-normal cursor-pointer  text-white `}
-          >
 
 
-            <Link to={`${nav.path}`}> {nav.title}</Link>
+        <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/'>Home</Link></li>
+        <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/blogs'>Blogs</Link></li>
+        {user?.email && <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/dashboard'>Dashboard</Link></li>}
 
-          </li>
-        ))}
+
       </ul>
 
       {/* auth */}
@@ -71,7 +70,7 @@ const Navbar = () => {
 
         {user ? <button
           onClick={handleLogOut}
-          className='text-white border px-2 rounded-md '>Log Out</button> : <li className='text-white'><Link to='/login'>Sign In</Link></li>}
+          className='text-white bg-emerald-900 border-[#f5f8f613] border px-2 rounded-md py-0.5  '>Log Out</button> : <li className='text-white'><Link to='/login'>Sign In</Link></li>}
 
       </ul>
 

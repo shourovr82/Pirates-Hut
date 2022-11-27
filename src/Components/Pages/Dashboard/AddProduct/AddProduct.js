@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
+import useSeller from '../../../../hooks/useSeller';
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
@@ -11,11 +12,7 @@ const AddProduct = () => {
   const [photolink, setPhotoLink] = useState('');
   const imgbbHostKey = process.env.REACT_APP_imgbb_key;
   const { register, handleSubmit, formState: { errors } } = useForm();
-
-
-  const hostPhoto = (image, formData) => {
-
-  }
+  const [isSeller, isSellerLoading] = useSeller(user?.email)
 
 
 
@@ -28,7 +25,6 @@ const AddProduct = () => {
       const formData = new FormData();
       formData.append('image', image);
       if (formData) {
-        // hostPhoto(image, formData);
         const url = `https://api.imgbb.com/1/upload?key=${imgbbHostKey}`;
         if (image) {
           fetch(url, {
@@ -38,8 +34,6 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(imgData => {
               const photoURL = imgData.data?.url;
-              console.log(imgData);
-
               const newProduct = {
                 category: data.category,
                 location: data.location,
@@ -72,14 +66,11 @@ const AddProduct = () => {
                   toast.success('Product added Successfull')
                   navigate('/dashboard/myproducts')
                 })
-              // setPhotoLink(photoURL)
             })
         }
 
       }
     }
-
-
 
   }
 
@@ -88,6 +79,13 @@ const AddProduct = () => {
     queryFn: () => fetch('http://localhost:5000/categories')
       .then(res => res.json())
   })
+
+  if (isSellerLoading) {
+    return <p>Laoding</p>
+  }
+  if (!isSeller) {
+    Navigate('/')
+  }
 
 
 
@@ -115,6 +113,7 @@ const AddProduct = () => {
                 placeholder="Product Name"
                 type="text"
                 id="name"
+                required
               />
             </div>
             <div>
@@ -126,7 +125,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 placeholder="Condition Type"
                 type="text"
-                id="condition"
+                id="condition" required
               />
             </div>
 
@@ -143,7 +142,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="number"
                 id="price"
-                placeholder='Resale Price'
+                placeholder='Resale Price' required
               />
             </div>
 
@@ -156,7 +155,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="number"
                 id="phone"
-                placeholder='Item Name'
+                placeholder='Your Phone Number' required
               />
             </div>
           </div>
@@ -172,7 +171,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="text"
                 id="purchase"
-                placeholder='Year of Purchase'
+                placeholder='Year of Purchase' required
               />
             </div>
 
@@ -186,7 +185,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="number"
                 id="originalprice"
-                placeholder='Original Price'
+                placeholder='Original Price' required
               />
             </div>
           </div>
@@ -201,7 +200,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="text"
                 id="brand"
-                placeholder='Product Brand'
+                placeholder='Product Brand' required
               />
             </div>
 
@@ -215,20 +214,20 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="text"
                 id="color"
-                placeholder='Product Color'
+                placeholder='Product Color' required
               />
             </div>
           </div>
           {/*  Product Image */}
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <label className="mb-1 block text-sm text-gray-600" htmlFor="image">
+              <label className="mb-1  block text-sm text-gray-600" htmlFor="image">
                 Product Photo
               </label>
 
               <input
                 {...register("image")}
-                type="file" id='image' className='input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
+                type="file" id='image' className='w-11/12 input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
               Upload Photo
             </div>
 
@@ -271,7 +270,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="text"
                 id="location"
-                placeholder='Your Location'
+                placeholder='Your Location' required
               />
             </div>
           </div>
@@ -285,16 +284,18 @@ const AddProduct = () => {
               className="w-full rounded-lg border border-gray-300 p-3 text-sm"
               placeholder="description"
               rows="8"
-              id="description"
+              id="description" required
             ></textarea>
           </div>
 
           <div className="mt-4">
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
+              className=" flex items-center gap-2 mt-2 py-2 rounded-full text-white text-lg  bg-gradient-to-r from-green-700 to-[#030850] border-0 px-10 hover:from-green-800 button-shadow button-color hover:to-[#050614fb]"
             >
-              <span className="font-medium">Send Enquiry </span>
+              <span className="font-medium">Add Product </span>
+
+
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"

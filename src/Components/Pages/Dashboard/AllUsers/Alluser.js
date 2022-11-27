@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 
 const Alluser = ({ refetch, users }) => {
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const { accountType, name, photoURL, verification, _id, email } = users;
 
-  console.log(users);
   return (
     <tr>
       <td>

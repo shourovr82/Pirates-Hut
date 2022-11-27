@@ -143,7 +143,7 @@ const AddProduct = () => {
                 className="w-full rounded-lg border-gray-200 p-3 text-sm border"
                 type="number"
                 id="price"
-                placeholder='Item Name'
+                placeholder='Resale Price'
               />
             </div>
 

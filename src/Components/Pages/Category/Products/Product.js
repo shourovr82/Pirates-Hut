@@ -6,6 +6,7 @@ import BookingModal from '../../../Shared/BookingModal';
 import { BsBookmarkPlusFill } from 'react-icons/bs';
 import { MdVerified } from "react-icons/md";
 import { BsFillCartPlusFill } from "react-icons/bs";
+import toast from 'react-hot-toast';
 
 
 
@@ -28,15 +29,15 @@ const Product = ({ product, refetch }) => {
     sellername, resolution, verification,
     productId: _id
   } = product;
+
   console.log(product);
 
-  const [bookedItem, setBookedItem] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleAddToWishList = (product) => {
 
     fetch(`http://localhost:5000/addtowishlist`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'content-type': 'application/json'
       },
@@ -44,21 +45,7 @@ const Product = ({ product, refetch }) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-
-        fetch(`http://localhost:5000/wishlistproduct/${product?._id}`, {
-          method: 'PUT',
-          headers: {
-            'content-type': 'application/json'
-          },
-        })
-          .then(res => res.json())
-          .then(data => {
-            console.log(data);
-            refetch();
-          })
-
-
+        toast.success('Successfully added to Wishlist')
       })
   }
 
@@ -87,7 +74,6 @@ const Product = ({ product, refetch }) => {
           <div>
             <button
               onClick={() => handleAddToWishList(product)}
-              disabled={product?.wishlist}
               className='btn-outline hover:bg-red-600 text-xs hover:border-white btn btn-sm'>
               <BsFillCartPlusFill className='text-2xl mr-2' />
               WishList
@@ -147,7 +133,6 @@ const Product = ({ product, refetch }) => {
             setModalitems={setModalitems}
             register={register}
             handleSubmit={handleSubmit}
-            setBookedItem={setBookedItem}
           ></BookingModal>
         }
 

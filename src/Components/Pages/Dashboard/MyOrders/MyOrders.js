@@ -10,10 +10,7 @@ const MyOrders = () => {
 
 
   useEffect(() => {
-
     const accessToken = localStorage.getItem('accessToken');
-
-
     if (user?.email && accessToken) {
 
       fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
@@ -31,41 +28,73 @@ const MyOrders = () => {
           if (data) {
             console.log(data);
             setMyOrders(data)
+            setLoading(false)
           }
         })
     }
 
 
 
-  }, [user?.email])
+  }, [user?.email, loading])
 
 
 
 
   return (
+
     <div>
-      <section className="text-gray-600 body-font">
+      {
+        myOrders.length > 0 ?
+          <div className="overflow-x-auto w-full">
+            <table className="table w-full">
+              <thead className='text-center'>
+                <tr>
+                  <th>Photo</th>
+                  <th>Price</th>
+                  <th>Product Title</th>
+                  <th>Status</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {myOrders &&
+                  myOrders.map(myorder => <MyOrderItem
+                    key={myorder._id}
+                    setLoading={setLoading}
+                    myorder={myorder}
+                  ></MyOrderItem>)
+                }
+
+              </tbody>
+            </table>
+          </div>
+          : ' No Orders  Added'
+      }
+    </div >
+
+    // <div>
+    //   <section className="text-gray-600 body-font">
 
 
 
-        <div className="grid grid-cols-2 -m-4">
-
-          {myOrders &&
-            myOrders.map(myorder => <MyOrderItem
-              key={myorder._id}
-              myorder={myorder}
-            ></MyOrderItem>)
-          }
-
+    //     <div className="grid grid-cols-2 -m-4">
+    //       {myOrders &&
+    //         myOrders.map(myorder => <MyOrderItem
+    //           key={myorder._id}
+    //           myorder={myorder}
+    //         ></MyOrderItem>)
+    //       }
 
 
 
 
 
 
-        </div>
-      </section>
-    </div>
+
+    //     </div>
+    //   </section>
+    // </div>
   );
 };
 

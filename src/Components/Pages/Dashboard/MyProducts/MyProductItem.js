@@ -8,7 +8,6 @@ const MyProductItem = ({ product, setDeleteConfirm }) => {
 
 
   const handleAddToAdvertise = (advertiseitem) => {
-    console.log(advertiseitem);
 
     fetch(`http://localhost:5000/addtoadvertise?id=${advertiseitem._id}`, {
       method: 'PUT',
@@ -23,8 +22,6 @@ const MyProductItem = ({ product, setDeleteConfirm }) => {
       })
 
   }
-  // console.log(advertisedItem);
-
 
   return (
     <tr>

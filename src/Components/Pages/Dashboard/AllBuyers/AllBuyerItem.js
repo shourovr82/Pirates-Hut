@@ -8,7 +8,6 @@ const AllBuyerItem = ({ buyer, refetch }) => {
 
 
   const handleDeleteSeller = () => {
-    console.log(buyer);
 
     fetch(`http://localhost:5000/deletebuyer/${buyer._id}`, {
       method: 'DELETE',

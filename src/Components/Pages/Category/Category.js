@@ -16,7 +16,6 @@ const Category = () => {
   useEffect(() => {
     axios.get('http://localhost:5000/categories')
       .then((res) => {
-        console.log(res.data);
         setCategories(res?.data)
       })
   }, [])

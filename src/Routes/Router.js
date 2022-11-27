@@ -5,6 +5,7 @@ import AllBuyers from "../Components/Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Components/Pages/Dashboard/AllSellers/AllSellers";
 import Alluser from "../Components/Pages/Dashboard/AllUsers/Alluser";
 import AllUsers from "../Components/Pages/Dashboard/AllUsers/AllUsers";
+import CheckOut from "../Components/Pages/Dashboard/CheckOut/CheckOut";
 import Dashboard from "../Components/Pages/Dashboard/Dashboard";
 import MyOrders from "../Components/Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Components/Pages/Dashboard/MyProducts/MyProducts";
@@ -36,7 +37,13 @@ const router = createBrowserRouter([
         path: '/category/:id',
         loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
         element: <Products></Products>
-      }
+      },
+      {
+        path: '/checkout/:id',
+        loader: ({ params }) => fetch(`http://localhost:5000/checkout/${params.id}`)
+        ,
+        element: <CheckOut></CheckOut>
+      },
     ]
   },
   {
@@ -72,6 +79,12 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/allusers',
         element: <AllUsers></AllUsers>
+      },
+      {
+        path: '/dashboard/checkout/:id',
+        loader: ({ params }) => fetch(`http://localhost:5000/dashboard/checkout/${params.id}`)
+        ,
+        element: <CheckOut></CheckOut>
       },
     ]
   }

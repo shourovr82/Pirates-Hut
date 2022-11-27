@@ -8,7 +8,7 @@ import { MdOutlineClose } from 'react-icons/md';
 
 const BookingModal = ({ product, setModalitems, handleBookItem }) => {
   const { user } = useContext(AuthContext)
-  const { title, _id, price, category } = product;
+  const { title, _id, price, category, image, sellername, location, } = product;
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -19,16 +19,19 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
 
     const item = {
       title: title,
-      itemId: _id,
       price: price,
       category: category,
       email: user?.email,
       buyerName: user?.displayName,
       phone: phone,
       buyerLocation: location,
-      availability: 'booked'
+      location: location,
+      availability: 'booked',
+      image: image,
+      sellername: sellername,
+      productId: _id,
     }
-
+    console.log(item);
 
     fetch('http://localhost:5000/bookItem', {
       method: 'POST',
@@ -171,10 +174,8 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
                             Book Now
                           </button>
 
-
                         </div>
                       </div>
-
 
 
                     </form>

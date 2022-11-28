@@ -41,7 +41,6 @@ const Login = () => {
     loginUser(email, password)
       .then(result => {
         const user = result.user;
-        console.log(user);
         getUserJwtToken(user?.email);
         toast.success(`Hi ${user?.displayName}, Welcome to our website !`)
       })

@@ -6,19 +6,6 @@ const DeleteMyProductModal = ({ deleteConfirm, setDeleteConfirm, handleDeletePro
   const navigate = useNavigate()
 
 
-  // const handleDeleteSeller = () => {
-  //   console.log(buyer);
-
-  //   fetch(`https://pirates-hut-server.vercel.app/deletebuyer/${}`, {
-  //     method: 'DELETE',
-  //     headers: {}
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       refetch();
-  //       toast.success('Successfully deleted Seller')
-  //     })
-  // }
 
 
 

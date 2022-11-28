@@ -31,7 +31,6 @@ const BookingModal = ({ product, setModalitems, handleBookItem }) => {
       sellername: sellername,
       productId: _id,
     }
-    console.log(item);
 
     fetch('https://pirates-hut-server.vercel.app/bookItem', {
       method: 'POST',

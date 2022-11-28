@@ -33,7 +33,6 @@ const CheckOutForm = ({ product }) => {
   }, [price]);
 
   const handleSubmit = async (event) => {
-    console.log('shafin');
     event.preventDefault();
 
     if (!stripe || !elements) {

@@ -5,7 +5,6 @@ import { RiAdminFill } from 'react-icons/ri';
 
 
 const SellerItem = ({ seller, refetch }) => {
-  console.log(seller);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const { name, photoURL, accountType, verification } = seller;
 

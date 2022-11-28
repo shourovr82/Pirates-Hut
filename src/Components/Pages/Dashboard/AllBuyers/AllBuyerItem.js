@@ -6,7 +6,6 @@ const AllBuyerItem = ({ buyer, refetch }) => {
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const { name, photoURL, accountType } = buyer;
 
-  console.log(buyer);
   const handleDeleteSeller = () => {
 
     fetch(`https://pirates-hut-server.vercel.app/deletebuyer/${buyer._id}`, {

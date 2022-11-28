@@ -42,7 +42,6 @@ const AllUsers = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setDeleteConfirm(null)
         refetch();
       })

@@ -31,7 +31,6 @@ const Product = ({ product, refetch }) => {
   const buyeremail = user?.email;
   const productId = product?._id;
   const newProducts = { ...product, buyeremail, productId }
-  console.log(newProducts);
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 

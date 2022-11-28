@@ -6,7 +6,7 @@ const AllBuyerItem = ({ buyer, refetch }) => {
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const { name, photoURL, accountType } = buyer;
 
-
+  console.log(buyer);
   const handleDeleteSeller = () => {
 
     fetch(`http://localhost:5000/deletebuyer/${buyer._id}`, {
@@ -21,22 +21,19 @@ const AllBuyerItem = ({ buyer, refetch }) => {
   }
 
 
-
   return (
     <>
       <tr>
         <td>
-          {/* <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3">
             <div className="avatar">
               <div className="mask mask-squircle w-12 h-12">
                 <img src={photoURL ? photoURL : ''} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
-          </div> */}
+          </div>
         </td>
         <td>{name}
-          <br />
-          <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
         </td>
         <td>{accountType}</td>
         <th>

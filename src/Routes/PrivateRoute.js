@@ -10,8 +10,9 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className='flex justify-center'>
-        <img src={spinner} className='w-80' alt="" />
+      <div className='flex flex-col items-center justify-center'>
+        <img src={spinner} className='w-60' alt="" />
+        <p className='text-green-700 font-bold animate-pulse'>Verifying User</p>
       </div>
     )
   }

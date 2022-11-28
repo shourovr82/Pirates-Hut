@@ -8,7 +8,7 @@ import { AuthContext } from '../../../AuthContexts/Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import useVerifyToken from '../../../hooks/useVerifyToken';
-
+import spinner from '../../../Assets/loading.svg'
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -19,7 +19,7 @@ const SignUp = () => {
   const [token] = useVerifyToken(useremail)
   const imgbbHostKey = process.env.REACT_APP_imgbb_key;
   const navigate = useNavigate();
-
+  const [signupLoading, setSignupLoading] = useState(false)
 
   const getUserJwtToken = email => {
     fetch(`http://localhost:5000/getjwt?email=${email}`)
@@ -27,7 +27,9 @@ const SignUp = () => {
       .then(data => {
         if (data.accessToken) {
           localStorage.setItem('accessToken', data.accessToken)
+          setSignupLoading(false)
           navigate('/')
+          toast.success('Successfully Account Registered')
         }
       })
   }
@@ -54,6 +56,7 @@ const SignUp = () => {
 
 
   const handleSignUp = (data) => {
+    setSignupLoading(true)
     const image = data.image[0];
     //  host photo
     if (image) {
@@ -153,6 +156,12 @@ const SignUp = () => {
       <br />
       <br />
       <br />
+      {
+        signupLoading &&
+        <div className='flex items-center absolute top-10 left-40 justify-center'><img src={spinner} alt="" />
+          <h2 className='  text-green-700 font-bold  animate-pulse '>Creating New Account</h2>
+        </div>
+      }
       <div className='grid mt-10 w-11/12 mx-auto md:grid-cols-2 justify-center items-center grid-cols-1'>
 
         {/*  form */}
@@ -242,7 +251,7 @@ const SignUp = () => {
                   onClick={handleGoogleLogin}
                   className='bg-[#06467027] px-4 text-slate-400 text-sm py-1 border border-[#21a4fc59] rounded-md flex items-center gap-2 '> <FcGoogle /> Continue With Google</button>
 
-                <button className='bg-[#06467027] px-4 text-slate-400 text-sm py-1 border border-[#21a4fc59] rounded-md flex items-center gap-2'> <GoMarkGithub /> Continue With Google</button>
+                <button className='bg-[#06467027] px-4 text-slate-400 text-sm py-1 border border-[#21a4fc59] rounded-md flex items-center gap-2'> <GoMarkGithub /> Continue With Github</button>
               </div>
 
 

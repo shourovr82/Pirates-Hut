@@ -25,7 +25,10 @@ root.render(
 
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <Toaster />
+        <Toaster
+          position="top-right"
+          reverseOrder={true}
+        />
         <App />
       </AuthProvider>
     </QueryClientProvider>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import useAdmin from '../../../../hooks/useAdmin';
 import AllBuyerItem from './AllBuyerItem';
+import spinner from '../../../../Assets/loading.svg'
 
 const AllBuyers = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const AllBuyers = () => {
   })
 
   if (isAdminLoading) {
-    return <p>Loading</p>
+    return <div className='flex justify-center'><img src={spinner} alt="" /></div>
   }
 
   if (!isAdmin) {
@@ -64,7 +65,7 @@ const AllBuyers = () => {
               </tbody>
             </table>
           </div>
-          : ' No Buyers  Added'
+          : <h1 className='text-center text-2xl text-green-800 font-bold '>No Buyers Found !! 😐😐</h1>
       }
     </div>
   );

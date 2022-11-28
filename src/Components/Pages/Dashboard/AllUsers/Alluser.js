@@ -1,12 +1,34 @@
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { MdOutlineClose } from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 
-const Alluser = ({ refetch, users }) => {
-  const [deleteConfirm, setDeleteConfirm] = useState(null);
+const Alluser = ({ refetch, users, setDeleteConfirm }) => {
   const { accountType, name, photoURL, verification, _id, email } = users;
+
+
+
+  const handleUserVerify = () => {
+    console.log(users);
+    fetch(`http://localhost:5000/setaccounttype/${users?._id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        toast.success('User Promoted to Admin')
+        refetch()
+      })
+
+  }
+
+
+
 
   return (
     <tr>
@@ -25,7 +47,7 @@ const Alluser = ({ refetch, users }) => {
         className='flex justify-center  items-center mt-2'
       >
         <button
-          // onClick={handleUserVerify}
+          onClick={handleUserVerify}
           disabled={accountType === 'Admin'}
           className='flex disabled:cursor-not-allowed disabled:bg-white disabled:text-black disabled:pr-3 disabled:w-10/12 pr-3  gap-3  pl-3 items-center hover:bg-emerald-900 cursor-pointer    border  py-1 rounded bg-emerald-700 text-white  justify-center'  >
 
@@ -36,43 +58,17 @@ const Alluser = ({ refetch, users }) => {
       <td>{accountType}</td>
 
       <td>
-        <label
-          // onClick={() => setDeleteConfirm(seller)}
-          htmlFor="my-modal-3" className="  
+        <label disabled={accountType === 'Admin'}
+          onClick={() => setDeleteConfirm(users)}
+          htmlFor="my-modal-3" className="
       btn btn-sm hover:bg-red-600 btn-circle btn-outline
           "><MdOutlineClose className='text-2xl' /></label>
       </td>
       <td>{email}</td>
 
 
-      {/* <> */}
-      {/* The button to open modal
-
-
-      {/* {deleteConfirm &&
-          <>
-            <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-            <div className="modal">
-              <div className="modal-box relative">
-                <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                <h3 className="text-lg font-bold">Are you sure want to delete ?</h3>
-                <p className="py-4">if you delete you will never undo</p>
-                <button
-                  type='submit'
-                  onClick={handleDeleteSeller}
-                  className='block text-center w-full rounded-lg bg-black p-2.5 text-sm text-white'
-                >
-                  Delete Seller
-                </button>
-              </div>
-
-
-            </div></>
-
-        } */}
-
-
-      {/* </> */}
+      <>
+      </>
 
 
 

@@ -5,7 +5,7 @@ const AdvertiseItems = ({ items }) => {
   const { advertise, availibility, category, condition, description, email, location, originalprice, phone, postdate, price, purchaseyear, title, image
   } = items;
   return (
-    <div className="p-4 md:w-3/4 mx-auto">
+    <div className="p-4 flex  mx-auto">
       <div className="h-full border-2 border-gray-200 border-opacity-60 bg-slate-50 rounded-lg overflow-hidden">
         <img className="h-72 w-full object-cover object-center" src={image} alt="blog" />
 

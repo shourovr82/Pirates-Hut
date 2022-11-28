@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blogs from "../Components/Pages/Blogs/Blogs";
 import Products from "../Components/Pages/Category/Products/Products";
 import AddProduct from "../Components/Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../Components/Pages/Dashboard/AllBuyers/AllBuyers";
@@ -13,15 +14,18 @@ import Wishlist from "../Components/Pages/Dashboard/Wishlist/Wishlist";
 import Home from "../Components/Pages/Homes/Home";
 import Login from "../Components/Pages/Login/Login";
 import SignUp from "../Components/Pages/Login/SignUp";
+import ErrorPage from "../Components/Shared/ErrorPage";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Main from "../Layouts/Main";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
@@ -36,9 +40,13 @@ const router = createBrowserRouter([
         element: <SignUp></SignUp>
       },
       {
+        path: '/blogs',
+        element: <Blogs></Blogs>
+      },
+      {
         path: '/category/:id',
         loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
-        element: <Products></Products>
+        element: <PrivateRoute><Products></Products></PrivateRoute>
       },
       {
         path: '/checkout/:id',
@@ -50,20 +58,20 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute> <DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
       {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
       }
       ,
       {
         path: '/dashboard/myorders',
-        element: <MyOrders></MyOrders>
+        element: <PrivateRoute><MyOrders></MyOrders></PrivateRoute>
       },
       {
         path: '/dashboard/wishlist',
-        element: <Wishlist></Wishlist>
+        element: <PrivateRoute><Wishlist></Wishlist></PrivateRoute>
       },
       {
         path: '/dashboard/myproducts',
@@ -72,7 +80,7 @@ const router = createBrowserRouter([
 
       {
         path: '/dashboard/addProduct',
-        element: <AddProduct></AddProduct>
+        element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
       },
       {
         path: '/dashboard/allsellers',
@@ -80,17 +88,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/allbuyers',
-        element: <AllBuyers></AllBuyers>
+        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
       },
       {
         path: '/dashboard/allusers',
-        element: <AllUsers></AllUsers>
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
       {
         path: '/dashboard/checkout/:id',
         loader: ({ params }) => fetch(`http://localhost:5000/dashboard/checkout/${params.id}`)
         ,
-        element: <CheckOut></CheckOut>
+        element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
       },
     ]
   }

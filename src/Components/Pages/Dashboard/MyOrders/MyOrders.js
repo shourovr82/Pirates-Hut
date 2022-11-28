@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import MyOrderItem from './MyOrderItem';
+import spinner from '../../../../Assets/loading.svg'
 
 const MyOrders = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -42,34 +43,39 @@ const MyOrders = () => {
   return (
 
     <div>
-      {
-        myOrders.length > 0 ?
-          <div className="overflow-x-auto w-full">
-            <table className="table w-full">
-              <thead className='text-center'>
-                <tr>
-                  <th>Photo</th>
-                  <th>Price</th>
-                  <th>Product Title</th>
-                  <th>Status</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                {myOrders &&
-                  myOrders.map(myorder => <MyOrderItem
-                    key={myorder._id}
-                    setLoading={setLoading}
-                    myorder={myorder}
-                  ></MyOrderItem>)
-                }
-
-              </tbody>
-            </table>
-          </div>
-          : ' No Orders  Added'
+      {loading &&
+        <div className='flex justify-center '>
+          <img src={spinner} alt="" />
+        </div>
       }
+      {
+        myOrders.length > 0 &&
+        <div className="overflow-x-auto w-full">
+          <table className="table w-full">
+            <thead className='text-center'>
+              <tr>
+                <th>Photo</th>
+                <th>Price</th>
+                <th>Product Title</th>
+                <th>Status</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {myOrders &&
+                myOrders.map(myorder => <MyOrderItem
+                  key={myorder._id}
+                  setLoading={setLoading}
+                  myorder={myorder}
+                ></MyOrderItem>)
+              }
+
+            </tbody>
+          </table>
+        </div>
+      }
+      {myOrders.length === 0 && <h1 className='text-center font-bold text-green-800 text-2xl mt-10'>No Orders Added</h1>}
     </div >
 
   );

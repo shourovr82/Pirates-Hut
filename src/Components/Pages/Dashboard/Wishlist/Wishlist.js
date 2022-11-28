@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
@@ -19,9 +18,9 @@ const Wishlist = () => {
         .then(res => res.json())
         .then(data => {
           console.log(data);
+          setDataLoading(false)
           setWishlistItems(data)
           setDeleted(false)
-          setDataLoading(false)
         })
     }
   }, [user?.email, deleted])
@@ -41,10 +40,8 @@ const Wishlist = () => {
         toast.success('Wishlist Deleted Successfull')
         setDataLoading(false)
       })
-
-
-
   }
+
 
 
   return (
@@ -83,7 +80,7 @@ const Wishlist = () => {
               </tbody>
             </table>
           </div>
-          : ' No Orders  Added'
+          : <h1 className='text-green-800 text-2xl text-center mt-10 font-bold '>No  Item Added to Wishlist !!</h1>
 
       }
       <>  {

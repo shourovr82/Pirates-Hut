@@ -48,64 +48,69 @@ const Navbar = () => {
 
   return (
     <div className={`w-full flex transparent  ${backgroundnav ? 'newnavbar ' : 'bg-gradient-to-r from-green-700 to-[#030850]'} py-2 justify-between items-center navbar`}>
-      <Link to='/'>
-        <img src={navlogo} alt="rexrox" className='w-[100px] h-[20px]' />
-      </Link>
+      <div className='w-[98%] mx-auto'>
+        <Link to='/'>
+          <img src={navlogo} alt="rexrox" className='w-[200px] h-[50px]  px-2' />
+        </Link>
+        <ul className='list-none sm:flex hidden justify-center items-center flex-1 gap-10  '>
 
 
-      <ul className='list-none sm:flex hidden justify-center items-center flex-1 gap-10  '>
+          <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/'>Home</Link></li>
+          <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/blogs'>Blogs</Link></li>
+          {user?.email && <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/dashboard'>Dashboard</Link></li>}
 
 
-        <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/'>Home</Link></li>
-        <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/blogs'>Blogs</Link></li>
-        {user?.email && <li><Link className={`font-poppins font-normal cursor-pointer  text-white `} to='/dashboard'>Dashboard</Link></li>}
+        </ul>
+
+        <ul className='list-none sm:flex hidden justify-end items-center  gap-3 mr-10 '>
 
 
-      </ul>
+          {user ? <button
+            onClick={handleLogOut}
+            className='text-white bg-emerald-900 border-[#f5f8f613] border px-2 rounded-md py-0.5  '>Log Out</button> : <li className='text-white'><Link to='/login'>Sign In</Link></li>}
+
+        </ul>
+
+        <div className='sm:hidden flex flex-1 justify-end items-center'>
+          <button
+            onClick={() => setToggle((prev) => !prev)}
+            className='w-[28px] h-[28px]'>{toggle ? < ImCross className='text-white text-3xl' /> : <TbAdjustmentsHorizontal className='text-white text-3xl' />}</button>
+          <div className={`${toggle ? 'flex' : 'hidden mt-100'} p-6 bg-gradient-to-r from-[#08a6e4] to-[#020d27f3] absolute  top-20 right-0 mx-4 px-20 py-10 my-2 min-w[140px] rounded-xl menu `}>
+
+            {/* mobile menu list */}
+
+            <ul className='list-none flex flex-col justify-end items-center flex-1  '>
+              {navMenu.map((nav, index) => (
+                <li key={nav.id}
+                  className={`font-poppins font-normal cursor-pointer  text-white   ${index === navMenu.length - 1 ? 'mr-0' : 'mb-4'}`}
+                >
+
+                  <Link to={`/${nav.id}`}> {nav.title}</Link>
+                </li>
+              ))}
+              <div className='flex  rounded  py-2 gap-10'>
+                <li onClick={() => setToggle((prev) => !prev)}>
+                  <Link to='/login' className='font-poppins font-normal  rounded-md cursor-pointer  text-white   mr-0 bg-red-600 px-5 py-3'> Login</Link>
+                </li>
+                <li
+                ><Link className={`font-poppins font-normal cursor-pointer  border  bg-[#1d40dd65] px-5 py-3 text-white   mr-0`}> Profile</Link></li>
+
+              </div>
+
+
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
 
       {/* auth */}
 
-      <ul className='list-none sm:flex hidden justify-end items-center  gap-3 mr-10 '>
-
-
-        {user ? <button
-          onClick={handleLogOut}
-          className='text-white bg-emerald-900 border-[#f5f8f613] border px-2 rounded-md py-0.5  '>Log Out</button> : <li className='text-white'><Link to='/login'>Sign In</Link></li>}
-
-      </ul>
-
-
-
-      <div className='sm:hidden flex flex-1 justify-end items-center'>
-        <button
-          onClick={() => setToggle((prev) => !prev)}
-          className='w-[28px] h-[28px]'>{toggle ? < ImCross className='text-white text-3xl' /> : <TbAdjustmentsHorizontal className='text-white text-3xl' />}</button>
-        <div className={`${toggle ? 'flex' : 'hidden mt-100'} p-6 bg-gradient-to-r from-[#08a6e4] to-[#020d27f3] absolute  top-20 right-0 mx-4 px-20 py-10 my-2 min-w[140px] rounded-xl menu `}>
-
-          {/* mobile menu list */}
-
-          <ul className='list-none flex flex-col justify-end items-center flex-1  '>
-            {navMenu.map((nav, index) => (
-              <li key={nav.id}
-                className={`font-poppins font-normal cursor-pointer  text-white   ${index === navMenu.length - 1 ? 'mr-0' : 'mb-4'}`}
-              >
-
-                <Link to={`/${nav.id}`}> {nav.title}</Link>
-              </li>
-            ))}
-            <div className='flex  rounded  py-2 gap-10'>
-              <li onClick={() => setToggle((prev) => !prev)}>
-                <Link to='/login' className='font-poppins font-normal  rounded-md cursor-pointer  text-white   mr-0 bg-red-600 px-5 py-3'> Login</Link>
-              </li>
-              <li
-              ><Link className={`font-poppins font-normal cursor-pointer  border  bg-[#1d40dd65] px-5 py-3 text-white   mr-0`}> Profile</Link></li>
-
-            </div>
-
-
-          </ul>
-        </div>
-      </div>
 
     </div >
   );

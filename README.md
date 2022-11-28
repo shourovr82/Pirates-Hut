@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# WELCOME TO OUR ONLINE RESALE SHOP PIRATES HUT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Website [Live Link ...](https://assignment-12-a2ab9.web.app)
+ ### or .. https://assignment-12-a2ab9.web.app/ live link
 
-## Available Scripts
+## Details About Our Website_____
 
-In the project directory, you can run:
 
-### `npm start`
+> Details About Our Website
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚩 How this Website was Built?
+- This Website is created by using REACT js.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Used React Router and Context API
+- used google firebase 
+- used environment process
+- used node express server for api
+- MongoDB Database for store data
+- I have used React hot toast 
+- Used daisyUi components library
+- Some custom CSS
+- Website fully dynamically by API data  
+- Used Tailwind CSS frameworks for styles and used daisy ui component for better interface.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## `HERE YOU CAN SEE    OTHER DETAILS.` 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## 🌏 Browser Support
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="https://user-images.githubusercontent.com/1215767/34348590-250b3ca2-ea4f-11e7-9efb-da953359321f.png" alt="IE" width="16px" height="16px" /> Internet Explorer | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge | <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari | <img src="https://user-images.githubusercontent.com/1215767/34348383-9e7ed492-ea4d-11e7-910c-03b39d52f496.png" alt="Firefox" width="16px" height="16px" /> Firefox |
+| :---------: | :---------: | :---------: | :---------: | :---------: |
+| Yes | 11+ | Yes | Yes | Yes |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## 🔧 Pull Request Steps
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+TOAST UI products are open source, so you can create a pull request(PR) after you fix issues. Run npm scripts and develop yourself with the following process.
 
-### Analyzing the Bundle Size
+### Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Fork `main` branch into your personal repository. Clone it to local computer. Install node modules. Before starting development, you should check if there are any errors.
 
-### Making a Progressive Web App
+```sh
+$ git clone https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-shourovr82.git
+$ npm install or npm i
+$ npm run build 
+$ npm start or npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Developed
 
-### Deployment
+CREATED BY ONE OF THE BEST NEWBIE WEB DEVELOPER SHAFIN RAHMAN
+ 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+ 
 
-### `npm run build` fails to minify
+## 📜 Web App License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This software is licensed under the [SHAFIN](https://github.com/shourovr82)

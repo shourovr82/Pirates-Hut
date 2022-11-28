@@ -20,6 +20,7 @@ const DashboardLayout = () => {
 
   }, [user?.email])
 
+  console.log(currentUser);
 
 
   return (

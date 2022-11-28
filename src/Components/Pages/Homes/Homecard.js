@@ -14,9 +14,9 @@ const HomeCard = () => {
           </svg>
           <h3 className="my-3 text-3xl font-semibold">Product</h3>
           <div className="space-y-1 leading-tight">
-            <p>Similique quas ea veniam</p>
-            <p>Tempore quasi porro</p>
-            <p>Blanditiis aut mollitia ex</p>
+            <p>Valentines' day sale</p>
+            <p>Pirates flash sale</p>
+            <p>Electronic Weak Sale</p>
           </div>
         </div>
         <div className="flex flex-col items-center p-4">
@@ -25,9 +25,9 @@ const HomeCard = () => {
           </svg>
           <h3 className="my-3 text-3xl font-semibold">Product</h3>
           <div className="space-y-1 leading-tight">
-            <p>Similique quas ea veniam</p>
-            <p>Tempore quasi porro</p>
-            <p>Blanditiis aut mollitia ex</p>
+            <p>Mega Deals</p>
+            <p>Hot Deals</p>
+            <p>Eid Shopping Fest</p>
           </div>
         </div>
         <div className="flex flex-col items-center p-4">
@@ -36,9 +36,9 @@ const HomeCard = () => {
           </svg>
           <h3 className="my-3 text-3xl font-semibold">Product</h3>
           <div className="space-y-1 leading-tight">
-            <p>Similique quas ea veniam</p>
-            <p>Tempore quasi porro</p>
-            <p>Blanditiis aut mollitia ex</p>
+            <p>Mobile Phones</p>
+            <p>Camera</p>
+            <p>Mobile accessories</p>
           </div>
         </div>
         <div className="flex flex-col items-center p-4">
@@ -47,9 +47,9 @@ const HomeCard = () => {
           </svg>
           <h3 className="my-3 text-3xl font-semibold">Product</h3>
           <div className="space-y-1 leading-tight">
-            <p>Similique quas ea veniam</p>
-            <p>Tempore quasi porro</p>
-            <p>Blanditiis aut mollitia ex</p>
+            <p>Earphone</p>
+            <p>Laptops</p>
+            <p>Led Tv</p>
           </div>
         </div>
         <div className="flex flex-col items-center p-4">
@@ -58,9 +58,9 @@ const HomeCard = () => {
           </svg>
           <h3 className="my-3 text-3xl font-semibold">Product</h3>
           <div className="space-y-1 leading-tight">
-            <p>Similique quas ea veniam</p>
-            <p>Tempore quasi porro</p>
-            <p>Blanditiis aut mollitia ex</p>
+            <p>Home appliance</p>
+            <p>FANS</p>
+            <p>Bikes</p>
           </div>
         </div>
         <div className="flex flex-col items-center p-4">
@@ -69,9 +69,9 @@ const HomeCard = () => {
           </svg>
           <h3 className="my-3 text-3xl font-semibold">Product</h3>
           <div className="space-y-1 leading-tight">
-            <p>Similique quas ea veniam</p>
-            <p>Tempore quasi porro</p>
-            <p>Blanditiis aut mollitia ex</p>
+            <p>Medicines</p>
+            <p>Popular stores</p>
+            <p>Trending Now</p>
           </div>
         </div>
       </div>

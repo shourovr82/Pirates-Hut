@@ -6,6 +6,10 @@
 ## Details About Our Website_____
 
 
+Admin Email : admin@gmail.com
+Admin Password : admin123
+
+
 > Details About Our Website
 
 ## 🚩 How this Website was Built?

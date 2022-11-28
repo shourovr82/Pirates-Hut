@@ -45,14 +45,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/category/:id',
-        loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
+        loader: ({ params }) => fetch(`https://pirates-hut-server.vercel.app/category/${params.id}`),
         element: <PrivateRoute><Products></Products></PrivateRoute>
-      },
-      {
-        path: '/checkout/:id',
-        loader: ({ params }) => fetch(`http://localhost:5000/checkout/${params.id}`)
-        ,
-        element: <CheckOut></CheckOut>
       },
     ]
   },
@@ -96,7 +90,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/checkout/:id',
-        loader: ({ params }) => fetch(`http://localhost:5000/dashboard/checkout/${params.id}`)
+        loader: ({ params }) => fetch(`https://pirates-hut-server.vercel.app/dashboard/checkout/${params.id}`)
         ,
         element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
       },

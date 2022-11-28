@@ -14,7 +14,7 @@ const MyOrders = () => {
     const accessToken = localStorage.getItem('accessToken');
     if (user?.email && accessToken) {
 
-      fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
+      fetch(`https://pirates-hut-server.vercel.app/myorders?email=${user?.email}`, {
         headers: {
           authorization: `bearer ${accessToken}`
         }
@@ -33,11 +33,7 @@ const MyOrders = () => {
         })
     }
 
-
-
   }, [user?.email, loading])
-
-
 
 
   return (
@@ -75,7 +71,7 @@ const MyOrders = () => {
           </table>
         </div>
       }
-      {myOrders.length === 0 && <h1 className='text-center font-bold text-green-800 text-2xl mt-10'>No Orders Added</h1>}
+      {!myOrders.length && <h1 className='text-center font-bold text-green-800 text-2xl mt-10'>No Orders Added</h1>}
     </div >
 
   );

@@ -22,7 +22,7 @@ const MyOrderItem = ({ myorder, setLoading }) => {
   console.log('inside my orderitem', myorder);
 
   const handleDeleteOrder = () => {
-    fetch(`http://localhost:5000/deleteorder/${myorder._id}`, {
+    fetch(`https://pirates-hut-server.vercel.app/deleteorder/${myorder._id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -56,7 +56,7 @@ const MyOrderItem = ({ myorder, setLoading }) => {
           {
             paymentStatus ? <button disabled={paymentStatus} className='block disabled:bg-slate-400 text-center disabled:cursor-not-allowed w-full rounded-lg bg-black p-2.5 text-sm text-white' title='Paid'>
               Paid
-            </button> : <Link className='block disabled:bg-slate-400 text-center disabled:cursor-context-menu w-full rounded-lg bg-black p-2.5 text-sm text-white' to={`/dashboard/checkout/${myorder.productId}`}
+            </button> : <Link className=' disabled:bg-slate-400 text-center disabled:cursor-context-menu  flex cursor-pointer justify-center items-center w-full gap-2 mt-2 py-2 rounded-full text-white text-lg  bg-gradient-to-r from-green-700 to-[#030850] border-0 hover:from-green-800 button-shadow button-color hover:to-[#050614fb]' to={`/dashboard/checkout/${myorder.productId}`}
               type='submit'
             >
 

@@ -16,7 +16,7 @@ const AllSellers = () => {
 
   const { data: sellers = [], isLoading, refetch } = useQuery({
     queryKey: ['sellers'],
-    queryFn: () => fetch('http://localhost:5000/allseller', {
+    queryFn: () => fetch('https://pirates-hut-server.vercel.app/allseller', {
       headers: {
         authorization: `bearer ${localStorage.getItem('accessToken')}`
       }

@@ -223,7 +223,7 @@ const Footer = () => {
 
           <div className="mt-16 border-t border-gray-100 pt-8">
             <div className="text-center text-xs leading-relaxed text-gray-500">
-              © Company 2022. All rights reserved.
+              © Shafin || Rexrox. All rights reserved.
 
               <br />
 

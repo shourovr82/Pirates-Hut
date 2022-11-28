@@ -12,7 +12,7 @@ const SellerItem = ({ seller, refetch }) => {
 
   const handleDeleteSeller = () => {
 
-    fetch(`http://localhost:5000/deleteseller/${seller._id}`, {
+    fetch(`https://pirates-hut-server.vercel.app/deleteseller/${seller._id}`, {
       method: 'DELETE',
       headers: {}
     })
@@ -24,7 +24,7 @@ const SellerItem = ({ seller, refetch }) => {
   }
 
   const handleUserVerify = () => {
-    fetch(`http://localhost:5000/verifyuser/${seller._id}`, {
+    fetch(`https://pirates-hut-server.vercel.app/verifyuser/${seller._id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
@@ -33,7 +33,7 @@ const SellerItem = ({ seller, refetch }) => {
       .then(res => res.json())
       .then(data => {
         refetch();
-        fetch(`http://localhost:5000/verifyuserproducts/${seller?.email}`, {
+        fetch(`https://pirates-hut-server.vercel.app/verifyuserproducts/${seller?.email}`, {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'

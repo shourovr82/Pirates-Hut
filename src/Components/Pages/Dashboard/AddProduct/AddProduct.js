@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import useSeller from '../../../../hooks/useSeller';
+import spinner from '../../../../Assets/adminLoading.svg'
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
@@ -53,7 +54,7 @@ const AddProduct = () => {
                 color: data?.color,
               }
 
-              fetch('http://localhost:5000/addproducts', {
+              fetch('https://pirates-hut-server.vercel.app/addproducts', {
                 method: 'POST',
                 headers: {
                   'content-type': 'application/json'
@@ -76,12 +77,14 @@ const AddProduct = () => {
 
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ['categories'],
-    queryFn: () => fetch('http://localhost:5000/categories')
+    queryFn: () => fetch('https://pirates-hut-server.vercel.app/categories')
       .then(res => res.json())
   })
 
   if (isSellerLoading) {
-    return <p>Laoding</p>
+    return <div><img className='w-20' src={spinner} alt="" />
+      <p className='text-green-700 font-bold animate-pulse'>Verifying Seller</p>
+    </div>
   }
   if (!isSeller) {
     Navigate('/')
@@ -91,11 +94,8 @@ const AddProduct = () => {
 
 
   return (
-    <section className="bg-gray-100">
-
-      <div className="rounded-lg p-10 bg-white  shadow-lg">
-
-
+    <section className="bg-gray-100 ">
+      <div className="rounded-lg p-10 bg-white  shadow-lg ">
         <form
           onSubmit={handleSubmit(hanleAddProduct)}
           className="space-y-4">
@@ -317,7 +317,10 @@ const AddProduct = () => {
 
 
       </div >
-
+      <br />
+      <br />
+      <br />
+      <br />
 
     </section >
   );

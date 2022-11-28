@@ -9,7 +9,7 @@ const DeleteMyProductModal = ({ deleteConfirm, setDeleteConfirm, handleDeletePro
   // const handleDeleteSeller = () => {
   //   console.log(buyer);
 
-  //   fetch(`http://localhost:5000/deletebuyer/${}`, {
+  //   fetch(`https://pirates-hut-server.vercel.app/deletebuyer/${}`, {
   //     method: 'DELETE',
   //     headers: {}
   //   })

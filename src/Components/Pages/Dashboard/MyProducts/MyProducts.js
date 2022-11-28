@@ -5,6 +5,7 @@ import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import useSeller from '../../../../hooks/useSeller';
 import DeleteMyProductModal from './DeleteMyProductModal';
 import MyProductItem from './MyProductItem';
+import spinner from '../../../../Assets/adminLoading.svg'
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const MyProducts = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/myproducts?email=${user?.email}`)
+      fetch(`https://pirates-hut-server.vercel.app/myproducts?email=${user?.email}`)
         .then(res => res.json())
         .then(result => {
           setMyProducts(result)
@@ -27,7 +28,9 @@ const MyProducts = () => {
   }, [user?.email, reload])
 
   if (isSellerLoading) {
-    return <p>Laoding</p>
+    return <div><img className='w-20' src={spinner} alt="" />
+      <p className='text-green-700 font-bold animate-pulse'>Verifying Seller</p>
+    </div>
   }
   if (!isSeller) {
     Navigate('/')
@@ -38,9 +41,8 @@ const MyProducts = () => {
 
 
   const handleDeleteProduct = (deleteConfirm) => {
-    console.log(deleteConfirm);
 
-    fetch(`http://localhost:5000/deletemyproduct/${deleteConfirm._id}`, {
+    fetch(`https://pirates-hut-server.vercel.app/deletemyproduct/${deleteConfirm._id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -48,13 +50,12 @@ const MyProducts = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         toast.success('Successfully deleted Seller')
         setDeleteConfirm(null)
         setReload(true)
         // fetch
         if (data?.acknowledged) {
-          fetch(`http://localhost:5000/deleteadvertiseproduct/${user?.email}`, {
+          fetch(`https://pirates-hut-server.vercel.app/deleteadvertiseproduct/${user?.email}`, {
             method: 'DELETE',
             headers: {
               'content-type': 'application/json'
@@ -71,10 +72,12 @@ const MyProducts = () => {
   }
 
 
-
   return (
     <div>
 
+      {
+        myProducts.length === 0 && <p className='text-green-700 font-bold text-center text-2xl'>You havent Added any Products</p>
+      }
       {
         myProducts?.length > 0 &&
         <div className="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">

@@ -2,6 +2,8 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../AuthContexts/Contexts/AuthProvider';
 import spinner from '../../../../Assets/loading.svg'
+import toast from 'react-hot-toast';
+
 
 const CheckOutForm = ({ product }) => {
   const [cardError, setCardError] = useState('');
@@ -13,11 +15,10 @@ const CheckOutForm = ({ product }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { price } = product;
-  console.log(product);
   useEffect(() => {
 
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://pirates-hut-server.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +80,7 @@ const CheckOutForm = ({ product }) => {
         price, transactionId: paymentIntent.id,
         productId: product.productId,
       }
-      fetch('http://localhost:5000/payments', {
+      fetch('https://pirates-hut-server.vercel.app/payments', {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -92,6 +93,7 @@ const CheckOutForm = ({ product }) => {
           if (data.acknowledged) {
             setSuccess('Congrats ! Your Payment completed');
             setTransactionId(paymentIntent.id);
+            toast.success('Congrats ! Your Payment Completed')
           }
         })
     }
@@ -99,73 +101,18 @@ const CheckOutForm = ({ product }) => {
   }
 
   return (
-    //   <div className="bg-white py-12 md:py-24">
-    //     <div className="mx-auto max-w-lg px-4 lg:px-8">
-    //       {/* <form className="grid grid-cols-6 gap-4"> */}
-    //       <div className="col-span-3">
-    //         <label className="mb-1 block text-sm text-gray-600" htmlFor="first_name">
-    //           First Name
-    //         </label>
-
-    //         <input
-    //           className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
-    //           type="text"
-    //           id="first_name"
-    //         />
-    //       </div>
-
-    //       <div className="col-span-3">
-    //         <label className="mb-1 block text-sm text-gray-600" htmlFor="last_name">
-    //           Last Name
-    //         </label>
-
-    //         <input
-    //           className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
-    //           type="text"
-    //           id="last_name"
-    //         />
-    //       </div>
-
-    //       <div className="col-span-6">
-    //         <label className="mb-1 block text-sm text-gray-600" htmlFor="email">
-    //           Email
-    //         </label>
-
-    //         <input
-    //           className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
-    //           type="email"
-    //           id="email"
-    //         />
-    //       </div>
-
-    //       <div className="col-span-6">
-    //         <label className="mb-1 block text-sm text-gray-600" htmlFor="phone">
-    //           Phone
-    //         </label>
-
-    //         <input
-    //           className="w-full rounded-lg border-gray-200 p-2.5 text-sm shadow-sm"
-    //           type="tel"
-    //           id="phone"
-    //         />
-    //       </div>
-
-    //       {/*  */}
-
-    //       <fieldset className="col-span-6">
-
-    //         <div className="-space-y-px rounded-lg bg-white shadow-sm">
 
     <>
+      <h1 className='py-2 text-2xl text-green-800'>Your Payment Card Info</h1>
       <form onSubmit={handleSubmit}>
-        <CardElement
+        <CardElement className='py-5 border px-3'
           options={{
             style: {
               base: {
                 fontSize: '16px',
                 color: '#424770',
                 '::placeholder': {
-                  color: '#aab7c4',
+                  color: '#000',
                 },
               },
               invalid: {
@@ -174,69 +121,17 @@ const CheckOutForm = ({ product }) => {
             },
           }}
         />
-        <button type="submit" className='btn' disabled={!stripe || !clientSecret || processing}>
-          Pay
+        <button type="submit" className='block text-center  rounded-lg bg-gradient-to-r from-green-700 to-[#030850] w-1/2 p-2.5 text-sm text-white mt-2 ' disabled={!stripe || !clientSecret || processing}>
+          Pay Now
         </button>
+
         <p className='text-red-600 text-2xl'>{cardError}</p>
-        {success && <p className='text-red-600 text-2xl'>{success} <span>Your Transaction Id : {transactionId}</span>  </p>
+        {success && <p className='text-green-600 text-2xl'>{success} <span>Your Transaction Id : {transactionId}</span>  </p>
         }</form>
+
+      {processing && <div><img src={spinner} alt="" /></div>}
     </>
 
-    //           </div >
-    //         </fieldset >
-
-    //         <fieldset className="col-span-6">
-    //           <legend className="mb-1 block text-sm text-gray-600">
-    //             Billing Address
-    //           </legend>
-
-    //           {/* <div className="-space-y-px rounded-lg bg-white shadow-sm">
-    //                       <div>
-    //                         <label className="sr-only" htmlFor="country">Country</label>
-
-    //                         <select
-    //                           className="relative w-full rounded-t-lg border-gray-200 p-2.5 text-sm focus:z-10"
-    //                           id="country"
-    //                           name="country"
-    //                           autoComplete="country-name"
-    //                         >
-    //                           <option>England</option>
-    //                           <option>Wales</option>
-    //                           <option>Scotland</option>
-    //                           <option>France</option>
-    //                           <option>Belgium</option>
-    //                           <option>Japan</option>
-    //                         </select>
-    //                       </div>
-
-    //                       <div>
-    //                         <label className="sr-only" htmlFor="postal-code">
-    //                           ZIP/Post Code
-    //                         </label>
-
-    //                         <input
-    //                           className="relative w-full rounded-b-lg border-gray-200 p-2.5 text-sm placeholder-gray-400 focus:z-10"
-    //                           type="text"
-    //                           name="postal-code"
-    //                           id="postal-code"
-    //                           autoComplete="postal-code"
-    //                           placeholder="ZIP/Post Code"
-    //                         />
-    //                       </div>
-    //                     </div>  ----------------------------------------------*/}
-    //         </fieldset>
-
-    //         <div className="col-span-6">
-    //           <button
-    //             className="block w-full rounded-lg bg-black p-2.5 text-sm text-white"
-    //             type="submit"
-    //           >
-    //             Pay Now
-    //           </button>
-    //         </div>
-    // {/* </form> */ }
-    //       </div >
-    //     </div >
 
 
 

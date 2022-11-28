@@ -9,8 +9,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const CheckOut = () => {
   const data = useLoaderData();
-  console.log(data);
-  const product = data[0]
+  const product = data[0];
   return (
     <div>
 
@@ -18,7 +17,7 @@ const CheckOut = () => {
         <h1 className="sr-only">Checkout</h1>
 
         <div className="relative mx-auto max-w-screen-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-3">
             <div className="bg-gray-50 py-12 md:py-24">
               <div className="mx-auto max-w-lg px-4 lg:px-8">
                 <div className="flex items-center">
@@ -32,23 +31,25 @@ const CheckOut = () => {
                   <p className="mt-1 text-sm text-gray-500">For the purchase of</p>
                 </div>
 
+
                 <div className="mt-12">
-                  <div className="flow-root">
-                    <ul className="-my-4 divide-y divide-gray-200">
-                      {data.map((item, index) => <CheckoutProduct
-                        key={index}
-                        item={item}
-                      ></CheckoutProduct>)}
-
-
-                    </ul>
-                  </div>
+                  {<CheckoutProduct
+                    item={product}
+                  ></CheckoutProduct>}
                 </div>
+
+
+
               </div>
             </div>
-            <Elements stripe={stripePromise}>
-              <CheckOutForm product={product} />
-            </Elements>
+
+            <div className=''>
+
+              <Elements stripe={stripePromise}>
+                <CheckOutForm product={product} />
+              </Elements>
+            </div>
+
 
           </div>
         </div>

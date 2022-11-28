@@ -30,11 +30,7 @@ const Navbar = () => {
 
 
 
-  const navMenu = [
-    { id: 'home', title: 'Home', path: '/' },
-    { id: 'blogs', title: 'Blogs', path: '/blogs' },
-    { id: 'dashboard', title: 'Dashboard', path: '/dashboard' },
-  ]
+
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -62,7 +58,7 @@ const Navbar = () => {
 
         </ul>
 
-        <ul className='list-none sm:flex hidden justify-end items-center  gap-3 mr-10 '>
+        <ul className='list-none sm:flex hidden  justify-end items-center  gap-3 mr-10 '>
 
 
           {user ? <button
@@ -71,34 +67,31 @@ const Navbar = () => {
 
         </ul>
 
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
+        <div className='sm:hidden  flex flex-1 justify-end items-center'>
           <button
             onClick={() => setToggle((prev) => !prev)}
             className='w-[28px] h-[28px]'>{toggle ? < ImCross className='text-white text-3xl' /> : <TbAdjustmentsHorizontal className='text-white text-3xl' />}</button>
-          <div className={`${toggle ? 'flex' : 'hidden mt-100'} p-6 bg-gradient-to-r from-[#08a6e4] to-[#020d27f3] absolute  top-20 right-0 mx-4 px-20 py-10 my-2 min-w[140px] rounded-xl menu `}>
+          <div className={`${toggle ? 'flex' : 'hidden mt-100'} p-6 bg-gradient-to-r from-[#01531d] to-[#030d24f3] absolute  top-20 right-0 mx-4 px-28 z-10  py-10 my-2 min-w[140px] rounded-xl menu `}>
 
             {/* mobile menu list */}
 
-            <ul className='list-none flex flex-col justify-end items-center flex-1  '>
-              {navMenu.map((nav, index) => (
-                <li key={nav.id}
-                  className={`font-poppins font-normal cursor-pointer  text-white   ${index === navMenu.length - 1 ? 'mr-0' : 'mb-4'}`}
-                >
 
-                  <Link to={`/${nav.id}`}> {nav.title}</Link>
-                </li>
-              ))}
-              <div className='flex  rounded  py-2 gap-10'>
-                <li onClick={() => setToggle((prev) => !prev)}>
-                  <Link to='/login' className='font-poppins font-normal  rounded-md cursor-pointer  text-white   mr-0 bg-red-600 px-5 py-3'> Login</Link>
-                </li>
-                <li
-                ><Link className={`font-poppins font-normal cursor-pointer  border  bg-[#1d40dd65] px-5 py-3 text-white   mr-0`}> Profile</Link></li>
 
-              </div>
+            <ul className='list-none  sm:hidden flex flex-col justify-center items-center flex-1 gap-10  '>
+              <li><Link className={`font-poppins font-normal cursor-pointer  border text-white `} to='/'>Home</Link></li>
+              <li><Link className={`font-poppins font-normal cursor-pointer  border text-white `} to='/blogs'>Blogs</Link></li>
+              {user?.email && <li cl><Link className={`font-poppins font-normal border cursor-pointer  text-white `} to='/dashboard'>Dashboard</Link></li>}
+              {user ? <button
+                onClick={handleLogOut}
+                className='text-white bg-emerald-900 border-[#f5f8f613] border px-2 rounded-md py-0.5  '>Log Out</button> : <li className='text-white border rounded-full'><Link to='/login'>Sign In</Link></li>}
+
 
 
             </ul>
+
+
+
+
           </div>
         </div>
 

@@ -14,8 +14,9 @@ const Home = () => {
 
       <Banner></Banner>
       <Category></Category>
-      {/* <HomeCard></HomeCard> */}
       <Advertise></Advertise>
+      <HomeCard></HomeCard>
+
 
     </div>
   );

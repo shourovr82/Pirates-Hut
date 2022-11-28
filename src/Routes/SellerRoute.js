@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../AuthContexts/Contexts/AuthProvider';
 import useSeller from '../hooks/useSeller';
+import spinner from '../Assets/adminLoading.svg'
 
 const SellerRoute = ({ children }) => {
   const { user, laoding } = useContext(AuthContext);
@@ -9,7 +10,9 @@ const SellerRoute = ({ children }) => {
   const location = useLocation();
 
   if (laoding || isSellerLoading) {
-    return <p>Loading</p>
+    return <div><img className='w-20' src={spinner} alt="" />
+      <p className='text-green-700 font-bold animate-pulse'>Verifying Seller</p>
+    </div>
   }
   if (user && isSeller) {
     return children;

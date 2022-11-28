@@ -6,7 +6,7 @@ const Advertise = () => {
 
   const { data: advertiseItems = [], isLoading, refetch } = useQuery({
     queryKey: ['advertiseItems'],
-    queryFn: () => fetch(`http://localhost:5000/advertisedItem`, {
+    queryFn: () => fetch(`https://pirates-hut-server.vercel.app/advertisedItem`, {
       headers: {
         'content-type': 'application/json',
         authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -18,7 +18,7 @@ const Advertise = () => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container md:px-5 py-24 mx-auto">
           <div className=" ">
             {advertiseItems.length > 0 &&
 
@@ -27,7 +27,7 @@ const Advertise = () => {
                   <div className='flex justify-center'>
                     <img src="https://i.ibb.co/qBG7hvN/360-F-117638965-ial9r-AQOoso-S8-Kim-B829rf-Gzpump-ILWr-removebg-preview.png" alt="" />
                   </div>
-                  <div className='grid grid-cols-3 justify-center  '>
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center  '>
                     {
                       advertiseItems.map(advertise =>
                         <AdvertiseItems

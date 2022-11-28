@@ -11,7 +11,7 @@ const DashboardLayout = () => {
   useEffect(() => {
 
     if (user?.email) {
-      fetch(`http://localhost:5000/users?email=${user?.email}`)
+      fetch(`https://pirates-hut-server.vercel.app/users?email=${user?.email}`)
         .then(res => res.json())
         .then(result => {
           setCurrentUser(result)
@@ -25,20 +25,23 @@ const DashboardLayout = () => {
   return (
     <div>
       <Navbar></Navbar>
+      <div className='flex justify-end mt-2 mr-2'>
+        <label htmlFor="my-drawer-2" className="btn border-emerald-700 text-black btn-outline  hover:bg-emerald-700   lg:hidden">Show Menu</label>
+      </div>
 
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content  flex flex-col  gap-10 px-10 mt-10">
+        <div className="drawer-content  flex flex-col  gap-10 px-5 md:px-10 mt-10">
 
           <Outlet></Outlet>
 
-          <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+
         </div>
 
 
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu   w-80 text-base-content border-r-2 border-[#03250942]  ">
+          <ul className="menu   w-80 bg-white text-base-content border-r-2 border-[#03250942]  ">
             <ul className="menu flex gap-3 justify-center  flex-col items-center   p-4 w-80 text-base-content">
               {
                 currentUser[0]?.accountType === 'Buyer' && <>
@@ -137,6 +140,7 @@ const DashboardLayout = () => {
           </ul>
         </div>
       </div>
+
     </div >
   );
 };

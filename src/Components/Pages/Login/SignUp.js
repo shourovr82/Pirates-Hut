@@ -22,7 +22,7 @@ const SignUp = () => {
   const [signupLoading, setSignupLoading] = useState(false)
 
   const getUserJwtToken = email => {
-    fetch(`http://localhost:5000/getjwt?email=${email}`)
+    fetch(`https://pirates-hut-server.vercel.app/getjwt?email=${email}`)
       .then(res => res.json())
       .then(data => {
         if (data.accessToken) {
@@ -86,7 +86,7 @@ const SignUp = () => {
               photoURL: photolink,
               accountType,
             }
-            fetch('http://localhost:5000/createuser', {
+            fetch('https://pirates-hut-server.vercel.app/createuser', {
               method: 'POST',
               headers: {
                 'content-type': 'application/json'
@@ -124,7 +124,7 @@ const SignUp = () => {
           photoURL: googleUser?.photoURL,
           accountType: 'Buyer',
         }
-        fetch('http://localhost:5000/createuser', {
+        fetch('https://pirates-hut-server.vercel.app/createuser', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -162,7 +162,7 @@ const SignUp = () => {
           <h2 className='  text-green-700 font-bold  animate-pulse '>Creating New Account</h2>
         </div>
       }
-      <div className='grid mt-10 w-11/12 mx-auto md:grid-cols-2 justify-center items-center grid-cols-1'>
+      <div className='grid mt-10 md:w-11/12 mx-auto md:grid-cols-2 justify-center items-center grid-cols-1'>
 
         {/*  form */}
         <div className='login-side-image hidden md:block'>
@@ -178,14 +178,14 @@ const SignUp = () => {
 
 
             <form onSubmit={handleSubmit(handleSignUp)} >
-              <div className='w-3/4  mx-auto flex flex-col gap-7 '>
+              <div className='w-11/12 md:w-3/4  mx-auto flex flex-col gap-7 '>
 
 
                 <input
                   {...register("name")}
                   type="text" placeholder=' Full Name' className='py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' required />
 
-                <label className="custom-file-upload py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  text-slate-400">
+                <label className="custom-file-upload py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  text-slate-400 ">
 
                   <input
                     {...register("image")}
@@ -210,7 +210,7 @@ const SignUp = () => {
 
                   {/* buyer or seller */}
 
-                  <div className='flex justify-end gap-3'>
+                  <div className='flex md:justify-end justify-center pb-4 md:pb gap-3'>
 
                     <div className="form-control border px-2 pl-5 border-[#35c0405b] rounded">
                       <label className="label cursor-pointer">
@@ -232,8 +232,8 @@ const SignUp = () => {
                   </div>
 
 
-                  <div className='md:flex items-center justify-between gap-3'>
-                    <button type="submit" className="  py-2 rounded-full text-white text-lg  bg-gradient-to-r from-green-500 to-[#14147c2a] border-0 px-6 hover:from-green-500 button-shadow button-color hover:to-[#2d419c60]">
+                  <div className='flex  items-center justify-end flex-col md:justify-between gap-3'>
+                    <button type="submit" className=" flex    py-2 rounded-full text-white text-lg  bg-gradient-to-r from-green-500 to-[#14147c2a] border-0 px-6 hover:from-green-500 button-shadow button-color hover:to-[#2d419c60]">
                       Sign Up
                     </button>
                     <p className='text-slate-400 flex mt-2 md:mt-0 gap-2 text-sm'>Already Have an Account ? <Link to='/login' className='text-blue-500  flex items-center gap-2'>Login Here <TbArrowBearRight /> </Link></p>
@@ -251,9 +251,7 @@ const SignUp = () => {
                   onClick={handleGoogleLogin}
                   className='bg-[#06467027] px-4 text-slate-400 text-sm py-1 border border-[#21a4fc59] rounded-md flex items-center gap-2 '> <FcGoogle /> Continue With Google</button>
 
-                <button className='bg-[#06467027] px-4 text-slate-400 text-sm py-1 border border-[#21a4fc59] rounded-md flex items-center gap-2'> <GoMarkGithub /> Continue With Github</button>
               </div>
-
 
 
 

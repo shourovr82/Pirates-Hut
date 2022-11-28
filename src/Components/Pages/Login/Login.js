@@ -21,7 +21,7 @@ const Login = () => {
 
 
   const getUserJwtToken = email => {
-    fetch(`http://localhost:5000/getjwt?email=${email}`)
+    fetch(`https://pirates-hut-server.vercel.app/getjwt?email=${email}`)
       .then(res => res.json())
       .then(data => {
         if (data.accessToken) {
@@ -65,7 +65,7 @@ const Login = () => {
           photoURL: googleUser?.photoURL,
           accountType: 'Buyer',
         }
-        fetch('http://localhost:5000/googlelogin', {
+        fetch('https://pirates-hut-server.vercel.app/googlelogin', {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'
@@ -100,17 +100,15 @@ const Login = () => {
         </div>
 
         <div className=''>
-          <h1 className='text-3xl text-center text-white uppercase font-bold'>You have to login first...</h1>
+          <h1 className='text-2xl md:text-3xl text-center text-white uppercase font-bold'>You have to login first...</h1>
 
-          <div className='mt-16 bg-[#01254728] p-10 rounded-lg'>
+          <div className='mt-16 bg-[#01254728] md:p-10 rounded-lg'>
             <form
               onSubmit={handleSubmit(handleLogin)}
               className=' '>
 
 
-              <div className='w-3/4  mx-auto flex flex-col gap-10 '>
-
-
+              <div className='md:w-3/4 p-3 mx-auto flex flex-col gap-10 '>
                 <input
                   {...register("email")}
                   type="email" placeholder='Type Your Email' className='py-2 px-4 rounded-md bg-[#103f6b25]  border-spacing-3 border-b  input:text-white focus:text-white text-slate-400 outline-none focus:border-[#0000000a] focus:bg-[#27526b65] focus:ring-2  focus:ring-green-500/50' />
@@ -132,13 +130,11 @@ const Login = () => {
               </div>
             </form>
 
-            <div className='flex flex-col md:flex-row mt-5 gap-3 justify-evenly items-center'>
+            <div className='flex flex-col md:flex-row mt-5 pb-5 gap-3 justify-evenly items-center'>
               <p className='text-xs text-slate-400 '>or signup with ...</p>
               <button
                 onClick={handleGoogleLogin}
                 className='bg-[#06467027] px-4 text-slate-400 text-sm py-1 border border-[#21a4fc59] rounded-md flex items-center gap-2 '> <FcGoogle /> Continue With Google</button>
-
-              <button className='bg-[#06467027] px-4 text-slate-400 text-sm py-1 border border-[#21a4fc59] rounded-md flex items-center gap-2'> <GoMarkGithub /> Continue With Github</button>
             </div>
           </div>
 

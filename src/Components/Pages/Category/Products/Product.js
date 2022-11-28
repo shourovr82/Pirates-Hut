@@ -29,7 +29,7 @@ const Product = ({ product, refetch }) => {
     sellername, resolution, verification, originalprice
   } = product;
   const buyeremail = user?.email;
-  const productId = 'product'?._id;
+  const productId = product?._id;
   const newProducts = { ...product, buyeremail, productId }
   console.log(newProducts);
 
@@ -37,7 +37,7 @@ const Product = ({ product, refetch }) => {
 
   const handleAddToWishList = () => {
     if (user?.email) {
-      fetch(`http://localhost:5000/addtowishlist`, {
+      fetch(`https://pirates-hut-server.vercel.app/addtowishlist`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json'

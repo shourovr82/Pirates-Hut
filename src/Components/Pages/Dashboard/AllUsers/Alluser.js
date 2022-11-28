@@ -11,8 +11,7 @@ const Alluser = ({ refetch, users, setDeleteConfirm }) => {
 
 
   const handleUserVerify = () => {
-    console.log(users);
-    fetch(`http://localhost:5000/setaccounttype/${users?._id}`, {
+    fetch(`https://pirates-hut-server.vercel.app/setaccounttype/${users?._id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',

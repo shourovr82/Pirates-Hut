@@ -9,7 +9,7 @@ const AllBuyerItem = ({ buyer, refetch }) => {
   console.log(buyer);
   const handleDeleteSeller = () => {
 
-    fetch(`http://localhost:5000/deletebuyer/${buyer._id}`, {
+    fetch(`https://pirates-hut-server.vercel.app/deletebuyer/${buyer._id}`, {
       method: 'DELETE',
       headers: {}
     })

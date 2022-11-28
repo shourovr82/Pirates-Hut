@@ -16,7 +16,7 @@ const AllUsers = () => {
 
   const { data: allusers = [], isLoading, refetch } = useQuery({
     queryKey: ['allusers'],
-    queryFn: () => fetch('http://localhost:5000/allusers', {
+    queryFn: () => fetch('https://pirates-hut-server.vercel.app/allusers', {
       headers: {
         authorization: `bearer ${localStorage.getItem('accessToken')}`
       }
@@ -36,7 +36,7 @@ const AllUsers = () => {
 
   const handleDeleteUser = (deleteuser) => {
 
-    fetch(` http://localhost:5000/deleteuser/${deleteuser._id}`, {
+    fetch(` https://pirates-hut-server.vercel.app/deleteuser/${deleteuser._id}`, {
       method: 'DELETE',
       headers: {},
     })

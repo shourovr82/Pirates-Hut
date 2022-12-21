@@ -1,7 +1,7 @@
 # WELCOME TO OUR ONLINE RESALE SHOP PIRATES HUT
 
-# Website [Live Link ...](https://assignment-12-a2ab9.web.app)
- ### or .. https://assignment-12-a2ab9.web.app/ live link
+# Website [Live Link ...](https://pirates-hut-5b341.web.app/)
+ ### or .. https://pirates-hut-5b341.web.app// live link
 
 ## Details About Our Website_____
 

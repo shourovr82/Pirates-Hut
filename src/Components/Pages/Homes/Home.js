@@ -1,6 +1,5 @@
 import React from 'react';
 import Category from '../Category/Category';
-import ProductsCategories from '../Category/ProductsCategories';
 import Advertise from './AdvertisedItems/Advertise';
 import Banner from './Banner';
 import './Home.css';

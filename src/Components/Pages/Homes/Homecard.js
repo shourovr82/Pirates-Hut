@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomeCard = () => {
   return (
-    <section className="m-4 md:m-8  text-gray-100">
+    <section className=" py-5 text-gray-100">
       <div className="container mx-auto p-4 my-6 space-y-2 text-center">
         <h2 className="text-5xl font-bold">Built to empower every team</h2>
         <p className="text-gray-400">Libero minima optio qui</p>

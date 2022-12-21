@@ -29,9 +29,6 @@ const Navbar = () => {
 
 
 
-
-
-
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setBackgroundNav(true);
@@ -43,7 +40,7 @@ const Navbar = () => {
   window.addEventListener('scroll', changeBackground);
 
   return (
-    <div className={`w-full flex transparent  ${backgroundnav ? 'newnavbar ' : 'bg-gradient-to-r from-green-700 to-[#030850]'} py-2 justify-between items-center navbar`}>
+    <div className={`w-full flex   ${backgroundnav ? 'newnavbar ' : 'bg-gradient-to-r from-green-700 to-[#030850]'} py-2 justify-between items-center navbar`}>
       <div className='w-[98%] mx-auto'>
         <Link to='/'>
           <img src={navlogo} alt="rexrox" className='w-[200px] h-[50px]  px-2' />

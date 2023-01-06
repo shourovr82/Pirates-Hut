@@ -41,7 +41,7 @@ const DashboardLayout = () => {
 
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu   w-80 bg-white text-base-content border-r-2 border-[#03250942]  ">
+          <ul className="menu   w-80 md:bg-transparent bg-white text-base-content border-r-2 border-[#03250942]  ">
             <ul className="menu flex gap-3 justify-center  flex-col items-center   p-4 w-80 text-base-content">
               {
                 currentUser[0]?.accountType === 'Buyer' && <>

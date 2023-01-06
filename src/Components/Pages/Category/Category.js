@@ -19,7 +19,7 @@ const Category = () => {
 
 
   return (
-    <div className=''>
+    <div className='' id='categories'>
       <section className="text-gray-600 body-font">
         {dataLoading &&
           <div className='flex justify-center '><img src={spinner} alt="" /></div>

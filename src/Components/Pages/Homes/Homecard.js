@@ -4,9 +4,13 @@ const HomeCard = () => {
   return (
     <section className=" py-5 text-gray-100">
       <div className="container mx-auto p-4 my-6 space-y-2 text-center">
-        <h2 className="text-5xl font-bold">Built to empower every team</h2>
-        <p className="text-gray-400">Libero minima optio qui</p>
+        <h2 className="text-5xl font-bold">We are improving our Business </h2>
+        <p className="text-gray-400">With Best Products all over World</p>
+
       </div>
+
+      {/* All Product  upcoming for Buyers */}
+
       <div className="container mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div className="flex flex-col items-center p-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 text-violet-400">

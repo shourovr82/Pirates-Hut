@@ -3,6 +3,7 @@ import React from 'react';
 const Blogs = () => {
   return (
     <div className='h-full py-10 pb-20'>
+      {/* Blog Section */}
       <h1 className='text-center  pt-10 text-3xl font-bold uppercase text-emerald-800'>Most Common Interview Questions</h1>
       <div className='flex  mt-12 justify-center'>
 

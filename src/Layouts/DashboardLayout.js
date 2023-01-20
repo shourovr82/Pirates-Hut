@@ -32,7 +32,7 @@ const DashboardLayout = () => {
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content  flex flex-col  gap-10 px-5 md:px-10 mt-10">
-
+          {/* for load all components */}
           <Outlet></Outlet>
 
 

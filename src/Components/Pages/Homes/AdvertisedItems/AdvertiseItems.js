@@ -4,7 +4,6 @@ const AdvertiseItems = ({ items }) => {
 
   const { advertise, availibility, category, condition, description, email, location, originalprice, phone, postdate, price, purchaseyear, title, image
   } = items;
-  console.log(items);
   return (
     <div className="p-4 flex  mx-auto">
       <div className="h-full border-2 border-gray-200 border-opacity-60 bg-slate-50 rounded-lg overflow-hidden">

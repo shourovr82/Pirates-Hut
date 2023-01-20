@@ -10,7 +10,7 @@ const Banner = () => {
       <br />
       <div className='flex  justify-center items-center mt-28 text-center'>
 
-
+        {/* Banner Text  */}
         <div className='flex flex-col gap-5 justify-center items-center'>
           <h2 className='text-3xl md:text-6xl font-bold  text-[#0dc167]'>Experience Personalized  <br />Online Shopping in Bangladesh </h2>
           <h2 className='text-2xl md:text-5xl text-white  font-semibold'>for Second Hand Products</h2>

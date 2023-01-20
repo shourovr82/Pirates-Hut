@@ -10,10 +10,16 @@ const Home = () => {
 
   return (
     <div className='primary-bg  mt-[-100px] ' >
-
+      {/* Banner Page */}
       <Banner></Banner>
+
+      {/* All Category Section */}
       <Category></Category>
+
+      {/* Advertised Items Section */}
       <Advertise></Advertise>
+
+      {/* Other Section for Website */}
       <HomeCard></HomeCard>
 
 

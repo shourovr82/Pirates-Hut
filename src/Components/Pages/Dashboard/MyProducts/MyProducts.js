@@ -74,10 +74,14 @@ const MyProducts = () => {
 
   return (
     <div>
-
+      {/* If no Product added */}
       {
         myProducts.length === 0 && <p className='text-green-700 font-bold text-center text-2xl'>You havent Added any Products</p>
       }
+
+
+      {/*  my products table -------------------- */}
+
       {
         myProducts?.length > 0 &&
         <div className="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">

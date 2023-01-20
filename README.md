@@ -54,7 +54,7 @@ TOAST UI products are open source, so you can create a pull request(PR) after yo
 Fork `main` branch into your personal repository. Clone it to local computer. Install node modules. Before starting development, you should check if there are any errors.
 
 ```sh
-$ git clone https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-shourovr82.git
+$ git clone https://github.com/shourovr82/Pirates-Hut.git
 $ npm install or npm i
 $ npm run build 
 $ npm start or npm run start

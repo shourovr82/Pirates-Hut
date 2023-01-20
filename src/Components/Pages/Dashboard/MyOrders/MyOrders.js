@@ -39,11 +39,16 @@ const MyOrders = () => {
   return (
 
     <div>
+
+      {/* Loading animation for data loading */}
+
       {loading &&
         <div className='flex justify-center '>
           <img src={spinner} alt="" />
         </div>
       }
+
+      {/* table for my orders -------------------- */}
       {
         myOrders.length > 0 &&
         <div className="overflow-x-auto w-full">
@@ -71,6 +76,7 @@ const MyOrders = () => {
           </table>
         </div>
       }
+      {/* if No Order Added */}
       {!myOrders.length && <h1 className='text-center font-bold text-green-800 text-2xl mt-10'>No Orders Added</h1>}
     </div >
 

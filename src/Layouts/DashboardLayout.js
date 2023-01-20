@@ -38,11 +38,12 @@ const DashboardLayout = () => {
 
         </div>
 
-
+        {/* Dasboard Drawer with menu items  */}
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu   w-80 md:bg-transparent bg-white text-base-content border-r-2 border-[#03250942]  ">
             <ul className="menu flex gap-3 justify-center  flex-col items-center   p-4 w-80 text-base-content">
+              {/* check buyer  --------------------*/}
               {
                 currentUser[0]?.accountType === 'Buyer' && <>
                   <li><NavLink to="/dashboard/myorders"
@@ -68,6 +69,10 @@ const DashboardLayout = () => {
                   >My Wishlist</NavLink></li>
                 </>
               }
+
+
+              {/* check Seller -------------------- */}
+
               {
                 currentUser[0]?.accountType === 'Seller' && <>
                   <li><NavLink to="/dashboard/myproducts"
@@ -92,6 +97,9 @@ const DashboardLayout = () => {
                   >Add Product</NavLink></li>
                 </>
               }
+
+              {/* Check Admin -------------------- */}
+
               {
                 currentUser[0]?.accountType === 'Admin' && <>
 
@@ -133,13 +141,11 @@ const DashboardLayout = () => {
                   >All Users</NavLink></li>
                 </>
               }
-
-
-
             </ul>
           </ul>
         </div>
       </div>
+      {/* Dasboard Drawer with menu items End  */}
 
     </div >
   );

@@ -50,6 +50,7 @@ const AllUsers = () => {
 
   return (
     <div>
+      {/* All users Table -------------------- */}
       {
         allusers.length > 0 ?
           <div className="overflow-x-auto w-full">
@@ -81,6 +82,7 @@ const AllUsers = () => {
           </div>
           : ' No Users Added'
       }
+      {/* Delete user modal -------------------- */}
       {deleteConfirm &&
         <>
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
